@@ -331,6 +331,35 @@
                   </ios>
                 </attestation>
               </client>
+              <client>
+                <id>haapi-public-client</id>
+                <client-name>haapi-public-client</client-name>
+                <no-authentication>true</no-authentication>
+                <redirect-uris>https://localhost:7777/client-callback</redirect-uris>
+                <proof-key>
+                  <require-proof-key>false</require-proof-key>
+                </proof-key>
+                <refresh-token-ttl>3600</refresh-token-ttl>
+                <scope>openid</scope>
+                <scope>profile</scope>
+                <user-authentication>
+                  <allowed-authenticators>Username-Password</allowed-authenticators>
+                </user-authentication>
+                <capabilities>
+                  <code>
+                  </code>
+                  <haapi/>
+                </capabilities>
+                <validate-port-on-loopback-interfaces>true</validate-port-on-loopback-interfaces>
+                <attestation>
+                  <disable-attestation-validation>true</disable-attestation-validation>
+                  <android>
+                    <package-name>com.example.haapidemo</package-name>
+                    <signature-digest>LVY9TfP6bKjNxCqyqYC2ayItIUtZk9rBkCTmyc219WY=</signature-digest>
+                    <android-policy>android-haapi-dev</android-policy>
+                  </android>
+                </attestation>
+              </client>
             </config-backed>
           </client-store>
         </authorization-server>
@@ -432,6 +461,14 @@
           <do-not-validate-certificate-chain/>
         </override-certificate-chain-validation>
       </ios-policy>
+      <android-policy xmlns="https://curity.se/ns/conf/client-attestation">
+        <id>android-haapi-dev</id>
+        <verify-boot-state>false</verify-boot-state>
+        <minimum-security-level>software</minimum-security-level>
+        <override-certificate-chain-validation>
+          <do-not-validate-certificate-chain/>
+        </override-certificate-chain-validation>
+      </android-policy>
     </client-attestation>
   </facilities>
   <processing xmlns="https://curity.se/ns/conf/base">
