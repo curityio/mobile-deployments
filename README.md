@@ -5,7 +5,7 @@ Resources for automating the setup of Curity mobile code examples.
 ## Usage
 
 This repository is a Git submodule referenced by the below code examples.\
-Run the `./deploy.sh` script in each code example to configure a working mobile OAuth setup.
+Run the `./start.sh` script for a code example to configure a working mobile OAuth setup.
 
 ## HAAPI Code Examples
 
