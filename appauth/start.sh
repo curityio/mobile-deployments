@@ -5,6 +5,11 @@
 ##########################################################################
 
 #
+# Change to this folder
+#
+cd "$(dirname "${BASH_SOURCE[0]}")"
+
+#
 # Check for a correct configuration file
 #
 CONFIG_FILE_PATH=$1
