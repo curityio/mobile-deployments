@@ -48,4 +48,5 @@ fi
 #
 # Return the authority base URL to the parent script
 #
-echo "$NGROK_URL/oauth/v2/oauth-anonymous"
+echo "$NGROK_URL/oauth/v2/oauth-anonymous">./output.txt
+exit 0
