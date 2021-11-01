@@ -32,7 +32,7 @@ fi
 #
 # Next deploy the Curity Identity server
 #
-docker compose --project-name haapi-ios up --detach --force-recreate
+docker compose --project-name haapi up --detach --force-recreate
 if [ $? -ne 0 ]; then
   echo "Problem encountered starting Docker components"
   exit 1

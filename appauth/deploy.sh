@@ -33,7 +33,7 @@ fi
 # Next deploy the Curity Identity server
 #
 cd idsvr
-docker compose --project-name appauth-android up --detach --force-recreate
+docker compose --project-name appauth up --detach --force-recreate
 if [ $? -ne 0 ]; then
   echo "Problem encountered starting Docker components"
   exit 1
