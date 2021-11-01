@@ -17,4 +17,4 @@ kill -9 $(pgrep ngrok) 2>/dev/null
 #
 # Stop Docker resources
 #
-docker compose --project-name appauth down --detach --force-recreate
+docker compose --project-name appauth down

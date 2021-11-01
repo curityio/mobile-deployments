@@ -10,18 +10,6 @@
 cd "$(dirname "${BASH_SOURCE[0]}")"
 
 #
-# Check for a correct configuration file
-#
-CONFIG_FILE_PATH=$1
-if [ "$CONFIG_FILE_PATH" == "" ]; then
-  echo "A configuration file path must be provided as a runtime parameter"
-fi
-if [ ! -f $CONFIG_FILE_PATH ]; then
-  echo "The configuration file path provided does not exist"
-  exit 1
-fi
-
-#
 # Check for a license file
 #
 if [ ! -f './license.json' ]; then
@@ -30,9 +18,11 @@ if [ ! -f './license.json' ]; then
 fi
 
 #
-# This is for Curity developers only, to prevent accidental checkins of license files
+# This is for Curity developers only, to prevent accidental checkins of license details
 #
-cp ../hooks/pre-commit ./.git/hooks
+if [ -d '../.git/hooks' ]; then
+  cp ../hooks/pre-commit ../.git/hooks
+fi
 
 #
 # Spin up ngrok, to get a trusted SSL internet URL for the Identity Server that mobile apps or simulators can connect to
@@ -56,14 +46,6 @@ if [ $? -ne 0 ]; then
 fi
 
 #
-# Update the mobile app's configuration file to set the issuer / authority to the NGROK URL
+# Return the Base URL to the parent script
 #
-AUTHORITY_URL="$NGROK_URL/oauth/v2/oauth-anonymous"
-MOBILE_CONFIG="$(cat $CONFIG_FILE_PATH)"
-echo $MOBILE_CONFIG | jq --arg i "$AUTHORITY_URL" '.issuer = $i' > $CONFIG_FILE_PATH
-
-#
-# Also output the URL, which can be useful to grab for development purposes
-#
-DISCOVERY_URL="$AUTHORITY_URL/.well-known/openid-configuration"
-echo "Identity Server is running at $DISCOVERY_URL"
+echo "$NGROK_URL/oauth/v2/oauth-anonymous"
