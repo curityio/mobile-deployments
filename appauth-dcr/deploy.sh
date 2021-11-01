@@ -15,7 +15,7 @@ fi
 #
 # This is for Curity developers only, to prevent accidental checkins of license files
 #
-cp ../hooks/pre-commit ./.git/hooks
+cp ./hooks/pre-commit ./.git/hooks
 
 #
 # Spin up ngrok, to get a trusted SSL internet URL for the Identity Server that mobile apps or simulators can connect to

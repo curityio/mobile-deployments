@@ -1,14 +1,26 @@
 #!/bin/bash
 
-############################################################################################
-# A script to run the Curity Identity Server with a mobile client configured and a test user
-############################################################################################
+##########################################################################
+# A script to provide an automated mobile OAuth setup for the code example
+##########################################################################
 
 #
-# First check prerequisites
+# Check for a correct configuration file
+#
+CONFIG_FILE_PATH=$1
+if [ "$CONFIG_FILE_PATH" == "" ]; then
+  echo "A configuration file path must be provided as a runtime parameter"
+fi
+if [ ! -f $CONFIG_FILE_PATH ]; then
+  echo "The configuration file path provided does not exist"
+  exit 1
+fi
+
+#
+# Check for a license file
 #
 if [ ! -f './license.json' ]; then
-  echo "Please provide a license.json file into the idsvr folder in order to deploy the system"
+  echo "A license.json file must be copied into this script's folder"
   exit 1
 fi
 
@@ -32,7 +44,6 @@ fi
 #
 # Next deploy the Curity Identity server
 #
-cd idsvr
 docker compose --project-name appauth up --detach --force-recreate
 if [ $? -ne 0 ]; then
   echo "Problem encountered starting Docker components"
@@ -42,10 +53,9 @@ fi
 #
 # Update the mobile app's configuration file to set the issuer / authority to the NGROK URL
 #
-cd ..
 AUTHORITY_URL="$NGROK_URL/oauth/v2/oauth-anonymous"
-MOBILE_CONFIG="$(cat ./android/app/src/main/res/raw/config.json)"
-echo $MOBILE_CONFIG | jq --arg i "$AUTHORITY_URL" '.issuer = $i' > ./android/app/src/main/res/raw/config.json
+MOBILE_CONFIG="$(cat $CONFIG_FILE_PATH)"
+echo $MOBILE_CONFIG | jq --arg i "$AUTHORITY_URL" '.issuer = $i' > $CONFIG_FILE_PATH
 
 #
 # Also output the URL, which can be useful to grab for development purposes
