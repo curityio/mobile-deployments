@@ -46,7 +46,7 @@ if [ $? -ne 0 ]; then
 fi
 
 #
-# Return the authority base URL to the parent script
+# Return the base URL to the parent script
 #
-echo "$NGROK_URL/oauth/v2/oauth-anonymous">./output.txt
+echo "$NGROK_URL">./output.txt
 exit 0

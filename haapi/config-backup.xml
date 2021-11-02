@@ -332,10 +332,10 @@
                 </attestation>
               </client>
               <client>
-                <id>haapi-public-client</id>
-                <client-name>haapi-public-client</client-name>
+                <id>haapi-android-client</id>
+                <client-name>haapi-android-client</client-name>
                 <no-authentication>true</no-authentication>
-                <redirect-uris>https://localhost:7777/client-callback</redirect-uris>
+                <redirect-uris>app://haapi</redirect-uris>
                 <proof-key>
                   <require-proof-key>false</require-proof-key>
                 </proof-key>
@@ -354,8 +354,8 @@
                 <attestation>
                   <disable-attestation-validation>true</disable-attestation-validation>
                   <android>
-                    <package-name>com.example.haapidemo</package-name>
-                    <signature-digest>LVY9TfP6bKjNxCqyqYC2ayItIUtZk9rBkCTmyc219WY=</signature-digest>
+                    <package-name>io.curity.haapidemo</package-name>
+                    <signature-digest>Z2DKEZO2XWFWQnApoRCzhqhIxzODe7BUsArj4Up9oKQ=</signature-digest>
                     <android-policy>android-haapi-dev</android-policy>
                   </android>
                 </attestation>
