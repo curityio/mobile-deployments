@@ -5,7 +5,7 @@ Resources for automating the setup of Curity mobile code examples.
 ## Usage
 
 This repository is a Git submodule referenced by the below code examples.\
-Run the `./start.sh` script for a code example to configure a working mobile OAuth setup.
+Run the `./start-idsvr.sh` script for a code example to configure a working mobile OAuth setup.
 
 ## HAAPI Code Examples
 
