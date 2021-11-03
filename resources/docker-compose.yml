@@ -25,8 +25,9 @@ services:
      - 8443:8443
     volumes:
      - ./license.json:/opt/idsvr/etc/init/license/license.json
-     - ./config-backup.xml:/opt/idsvr/etc/init/config.xml
      - ./log4j2.xml:/opt/idsvr/etc/log4j2.xml
+     - ./config-backup.xml:/opt/idsvr/etc/init/config.xml
     environment:
       PASSWORD: 'Password1'
-      RUNTIME_BASE_URL: "${NGROK_URL}"
+      RUNTIME_PROTOCOL: "${RUNTIME_PROTOCOL}"
+      RUNTIME_BASE_URL: "${RUNTIME_BASE_URL}"

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##########################################################################
-# A script to provide an automated mobile OAuth setup for the code example
+# A script to provide an automated OAuth setup for the mobile code example
 ##########################################################################
 
 #
@@ -10,20 +10,29 @@
 cd "$(dirname "${BASH_SOURCE[0]}")"
 USE_NGROK="$1"
 BASE_URL="$2"
+EXAMPLE_NAME="$3"
+
+#
+# Check for valid input
+#
+if [ "$USE_NGROK" == '' ] || [ "$BASE_URL" == '' ] || [ "$EXAMPLE_NAME" == '' ]; then
+  echo 'Incorrect command line arguments supplied to the start.sh script'
+  exit 1
+fi
 
 #
 # Check for a license file
 #
-if [ ! -f './license.json' ]; then
-  echo "A license.json file must be copied into this script's folder"
+if [ ! -f './resources/license.json' ]; then
+  echo 'A license.json file must be provided in the resources folder'
   exit 1
 fi
 
 #
 # This is for Curity developers only, to prevent accidental checkins of license details
 #
-if [ -d '../.git/hooks' ]; then
-  cp ../hooks/pre-commit ../.git/hooks
+if [ -d '.git/hooks' ]; then
+  cp ./hooks/pre-commit ./.git/hooks
 fi
 
 #
@@ -51,7 +60,9 @@ fi
 #
 # Next deploy the Curity Identity server
 #
-docker compose --project-name haapi up --detach --force-recreate
+cp $EXAMPLE_NAME/config-backup.xml resources/
+cd resources
+docker compose --project-name $EXAMPLE_NAME up --detach --force-recreate
 if [ $? -ne 0 ]; then
   echo 'Problem encountered starting Docker components'
   exit 1
