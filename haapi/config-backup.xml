@@ -18,7 +18,7 @@
         </zones>
         <service-role>
           <id>default</id>
-          <protocol>http</protocol>
+          <protocol>#{RUNTIME_PROTOCOL}</protocol>
           <endpoints>authentication-service-anonymous</endpoints>
           <endpoints>authentication-service-authentication</endpoints>
           <endpoints>authentication-service-registration</endpoints>

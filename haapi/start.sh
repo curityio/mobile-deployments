@@ -33,10 +33,17 @@ if [ "$USE_NGROK" == 'true' ]; then
   kill -9 $(pgrep ngrok) 2>/dev/null
   ngrok http 8443 -log=stdout &
   sleep 5
-  export BASE_URL=$(curl -s http://localhost:4040/api/tunnels | jq -r '.tunnels[] | select(.proto == "https") | .public_url')
-  if [ "$BASE_URL" == "" ]; then
+  export RUNTIME_BASE_URL=$(curl -s http://localhost:4040/api/tunnels | jq -r '.tunnels[] | select(.proto == "https") | .public_url')
+  export RUNTIME_PROTOCOL="http"
+  if [ "$RUNTIME_BASE_URL" == "" ]; then
     echo 'Problem encountered getting an NGROK URL'
     exit 1
+  fi
+else
+  if [[ "$BASE_URL" == https* ]]; then
+    export RUNTIME_PROTOCOL="https"
+  else
+    export RUNTIME_PROTOCOL="http"
   fi
 fi
 
@@ -52,5 +59,5 @@ fi
 #
 # Return the base URL to the parent script
 #
-echo "$BASE_URL">./output.txt
+echo "$RUNTIME_BASE_URL">./output.txt
 exit 0
