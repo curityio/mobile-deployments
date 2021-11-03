@@ -40,6 +40,7 @@ if [ "$USE_NGROK" == 'true' ]; then
     exit 1
   fi
 else
+  export RUNTIME_BASE_URL=$BASE_URL
   if [[ "$BASE_URL" == https* ]]; then
     export RUNTIME_PROTOCOL="https"
   else
