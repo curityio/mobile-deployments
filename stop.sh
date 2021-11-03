@@ -8,13 +8,14 @@
 # Change to this folder
 #
 cd "$(dirname "${BASH_SOURCE[0]}")"
-EXAMPLE_NAME="$1"
+USE_NGROK="$1"
+EXAMPLE_NAME="$2"
 
 #
 # Check for valid input
 #
-if [ "$EXAMPLE_NAME" == '' ]; then
-  echo 'Incorrect command line arguments supplied to the start.sh script'
+if [ "$USE_NGROK" == '' ] || [ "$EXAMPLE_NAME" == '' ]; then
+  echo 'Incorrect command line arguments supplied to the stop.sh script'
   exit 1
 fi
 
