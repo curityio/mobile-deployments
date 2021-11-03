@@ -24,6 +24,8 @@ fi
 kill -9 $(pgrep ngrok) 2>/dev/null
 
 #
-# Stop Docker resources
+# Stop Docker resources and set these Docker compose variables to prevent warnings
 #
+export RUNTIME_PROTOCOL='' 
+export RUNTIME_BASE_URL=''
 docker compose --project-name $EXAMPLE_NAME down
