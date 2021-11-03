@@ -71,5 +71,6 @@ fi
 #
 # Return the base URL to the parent script
 #
+cd ..
 echo "$RUNTIME_BASE_URL">./output.txt
 exit 0
