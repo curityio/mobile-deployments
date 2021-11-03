@@ -19,6 +19,7 @@
         <service-role>
           <id>default</id>
           <protocol>#{RUNTIME_PROTOCOL}</protocol>
+          <ssl-server-keystore>default-admin-ssl-key</ssl-server-keystore>
           <endpoints>authentication-service-anonymous</endpoints>
           <endpoints>authentication-service-authentication</endpoints>
           <endpoints>authentication-service-registration</endpoints>
