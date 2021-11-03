@@ -8,6 +8,8 @@
 # Change to this folder
 #
 cd "$(dirname "${BASH_SOURCE[0]}")"
+USE_NGROK="$1"
+BASE_URL="$2"
 
 #
 # Check for a license file
@@ -27,13 +29,15 @@ fi
 #
 # Spin up ngrok, to get a trusted SSL internet URL for the Identity Server that mobile apps or simulators can connect to
 #
-kill -9 $(pgrep ngrok) 2>/dev/null
-ngrok http 8443 -log=stdout &
-sleep 5
-export NGROK_URL=$(curl -s http://localhost:4040/api/tunnels | jq -r '.tunnels[] | select(.proto == "https") | .public_url')
-if [ "$NGROK_URL" == "" ]; then
-  echo 'Problem encountered getting an NGROK URL'
-  exit 1
+if [ "$USE_NGROK" == 'true' ]; then
+  kill -9 $(pgrep ngrok) 2>/dev/null
+  ngrok http 8443 -log=stdout &
+  sleep 5
+  export BASE_URL=$(curl -s http://localhost:4040/api/tunnels | jq -r '.tunnels[] | select(.proto == "https") | .public_url')
+  if [ "$BASE_URL" == "" ]; then
+    echo 'Problem encountered getting an NGROK URL'
+    exit 1
+  fi
 fi
 
 #
@@ -48,5 +52,5 @@ fi
 #
 # Return the base URL to the parent script
 #
-echo "$NGROK_URL">./output.txt
+echo "$BASE_URL">./output.txt
 exit 0
