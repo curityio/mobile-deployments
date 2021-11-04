@@ -92,7 +92,7 @@ HTTP_STATUS=$(curl -k -s \
 -u "$ADMIN_USER:$ADMIN_PASSWORD" \
 -H 'Content-Type: application/yang-data+xml' \
 -d @example-config.xml \
--o go.txt -w '%{http_code}')
+-o /dev/null -w '%{http_code}')
 if [ "$HTTP_STATUS" != '204' ]; then
   echo "Problem encountered updating the configuration: $HTTP_STATUS"
   exit 1
