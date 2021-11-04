@@ -5,7 +5,7 @@
 ##########################################################################
 
 #
-# Change to this folder
+# Change to this folder and accept input
 #
 cd "$(dirname "${BASH_SOURCE[0]}")"
 USE_NGROK="$1"
@@ -58,13 +58,43 @@ else
 fi
 
 #
+# Copy code example resources
+#
+cp $EXAMPLE_NAME/example-config.xml resources/
+cd resources
+
+#
 # Next deploy the Curity Identity server
 #
-cp $EXAMPLE_NAME/config-backup.xml resources/
-cd resources
 docker compose --project-name $EXAMPLE_NAME up --detach --force-recreate
 if [ $? -ne 0 ]; then
   echo 'Problem encountered starting Docker components'
+  exit 1
+fi
+
+#
+# Wait for the Identity Server to become available
+#
+echo 'Waiting for the Curity Identity Server ...'
+RESTCONF_BASE_URL='https://localhost:6749/admin/api/restconf/data'
+ADMIN_USER='admin'
+ADMIN_PASSWORD='Password1'
+while [ "$(curl -k -s -o /dev/null -w ''%{http_code}'' -u "$ADMIN_USER:$ADMIN_PASSWORD" "$RESTCONF_BASE_URL?content=config")" != "200" ]; do
+  sleep 2s
+done
+
+#
+# Apply the code example's configuration via a RESTCONF PATCH
+#
+echo 'Applying code example configuration ...'
+HTTP_STATUS=$(curl -k -s \
+-X PATCH "$RESTCONF_BASE_URL" \
+-u "$ADMIN_USER:$ADMIN_PASSWORD" \
+-H 'Content-Type: application/yang-data+xml' \
+-d @example-config.xml \
+-o go.txt -w '%{http_code}')
+if [ "$HTTP_STATUS" != '204' ]; then
+  echo "Problem encountered updating the configuration: $HTTP_STATUS"
   exit 1
 fi
 

@@ -1,0 +1,74 @@
+<!--
+  ~ Copyright (C) 2020 Curity AB. All rights reserved.
+  ~
+  ~ The contents of this file are the property of Curity AB.
+  ~ You may not copy or use this file, in either source code
+  ~ or executable form, except in compliance with terms
+  ~ set by Curity AB.
+  ~
+  ~ For further information, please contact Curity AB.
+  -->
+
+<data xmlns="urn:ietf:params:xml:ns:yang:ietf-restconf">
+    <profiles xmlns="https://curity.se/ns/conf/base">
+        <profile>
+            <id>token-service</id>
+            <type xmlns:as="https://curity.se/ns/conf/profile/oauth">as:oauth-service</type>
+            <expose-detailed-error-messages/>
+            <settings>
+                <authorization-server xmlns="https://curity.se/ns/conf/profile/oauth">
+                    <client-store>
+                        <config-backed>
+                            <client>
+                                <id>mobile-dcr-client</id>
+                                <client-name>mobile-dcr-client</client-name>
+                                <no-authentication>true</no-authentication>
+                                <redirect-uris>io.curity.dcrclient:/callback</redirect-uris>
+                                <proof-key>
+                                    <require-proof-key>true</require-proof-key>
+                                </proof-key>
+                                <refresh-token-ttl>disabled</refresh-token-ttl>
+                                <user-authentication>
+                                    <allowed-authenticators>Username-Password</allowed-authenticators>
+                                    <allowed-post-logout-redirect-uris>io.curity.dcrclient:/logoutcallback</allowed-post-logout-redirect-uris>
+                                </user-authentication>
+                                <allowed-origins>https://oauth.tools</allowed-origins>
+                                <capabilities>
+                                    <code>
+                                    </code>
+                                </capabilities>
+                                <use-pairwise-subject-identifiers>
+                                    <sector-identifier>mobile-dcr-client</sector-identifier>
+                                </use-pairwise-subject-identifiers>
+                                <validate-port-on-loopback-interfaces>true</validate-port-on-loopback-interfaces>
+                            </client>
+                        </config-backed>
+                    </client-store>
+                    <dynamic-client-registration>
+                        <client-data-source>default-datasource</client-data-source>
+                        <non-templatized>
+                        <capabilities>
+                            <code/>
+                            <implicit/>
+                            <resource-owner-password-credentials/>
+                            <assisted-token/>
+                            <client-credentials/>
+                        </capabilities>
+                        <scopes>
+                            <all/>
+                        </scopes>
+                        <authenticators>
+                            <all/>
+                        </authenticators>
+                        <client-authentication-method>
+                            <secret>
+                            </secret>
+                        </client-authentication-method>
+                        <authenticate-user-by>mobile-dcr-client</authenticate-user-by>
+                        </non-templatized>
+                    </dynamic-client-registration>
+                </authorization-server>
+            </settings>
+        </profile>
+    </profiles>
+</data>
