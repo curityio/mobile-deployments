@@ -1,4 +1,4 @@
 .DS_Store
 license.json
 output.txt
-resources/config-backup.xml
+resources/example-config.xml
