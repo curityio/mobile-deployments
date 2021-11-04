@@ -26,6 +26,7 @@
           <endpoints>token-service-anonymous</endpoints>
           <endpoints>token-service-assisted-token</endpoints>
           <endpoints>token-service-authorize</endpoints>
+          <endpoints>token-service-dynamic-client-registration</endpoints>
           <endpoints>token-service-introspect</endpoints>
           <endpoints>token-service-revoke</endpoints>
           <endpoints>token-service-session</endpoints>
@@ -323,6 +324,11 @@
           <id>token-service-authorize</id>
           <uri>/oauth/v2/oauth-authorize</uri>
           <endpoint-kind>oauth-authorize</endpoint-kind>
+        </endpoint>
+        <endpoint>
+          <id>token-service-dynamic-client-registration</id>
+          <uri>/token-service/oauth-registration</uri>
+          <endpoint-kind>oauth-dynamic-client-registration</endpoint-kind>
         </endpoint>
         <endpoint>
           <id>token-service-introspect</id>
