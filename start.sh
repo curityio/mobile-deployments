@@ -58,10 +58,14 @@ else
 fi
 
 #
+# Copy code example resources
+#
+cp $EXAMPLE_NAME/example-config.xml resources/
+cd resources
+
+#
 # Next deploy the Curity Identity server
 #
-cp $EXAMPLE_NAME/config-backup.xml resources/
-cd resources
 docker compose --project-name $EXAMPLE_NAME up --detach --force-recreate
 if [ $? -ne 0 ]; then
   echo 'Problem encountered starting Docker components'
@@ -82,11 +86,12 @@ done
 #
 # Apply the code example's configuration via a RESTCONF PATCH
 #
+echo 'Applying code example configuration ...'
 HTTP_STATUS=$(curl -k -s \
 -X PATCH "$RESTCONF_BASE_URL" \
 -u "$ADMIN_USER:$ADMIN_PASSWORD" \
 -H 'Content-Type: application/yang-data+xml' \
--d @resources/example-config.xml \
+-d @example-config.xml \
 -o go.txt -w '%{http_code}')
 if [ "$HTTP_STATUS" != '204' ]; then
   echo "Problem encountered updating the configuration: $HTTP_STATUS"
