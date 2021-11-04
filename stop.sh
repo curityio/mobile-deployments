@@ -20,9 +20,11 @@ if [ "$USE_NGROK" == '' ] || [ "$EXAMPLE_NAME" == '' ]; then
 fi
 
 #
-# Stop ngrok
+# Stop ngrok if required
 #
-kill -9 $(pgrep ngrok) 2>/dev/null
+if [ "$USE_NGROK" == 'true' ]; then
+  kill -9 $(pgrep ngrok) 2>/dev/null
+fi
 
 #
 # Stop Docker resources and set these Docker compose variables to prevent warnings
