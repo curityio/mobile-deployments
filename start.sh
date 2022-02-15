@@ -80,7 +80,7 @@ RESTCONF_BASE_URL='https://localhost:6749/admin/api/restconf/data'
 ADMIN_USER='admin'
 ADMIN_PASSWORD='Password1'
 while [ "$(curl -k -s -o /dev/null -w ''%{http_code}'' -u "$ADMIN_USER:$ADMIN_PASSWORD" "$RESTCONF_BASE_URL?content=config")" != "200" ]; do
-  sleep 2s
+  sleep 2
 done
 
 #
