@@ -26,6 +26,11 @@
                                 <redirect-uris>haapi:start</redirect-uris>
                                 <user-authentication>
                                 </user-authentication>
+                                <scope>address</scope>
+                                <scope>email</scope>
+                                <scope>openid</scope>
+                                <scope>phone</scope>
+                                <scope>profile</scope>
                                 <capabilities>
                                 <code/>
                                 <haapi/>
