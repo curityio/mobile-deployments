@@ -1,5 +1,0 @@
-1. Update auto deployment
-
-2. Checkin Android code
-
-3. Finalize doc and send to Henri
