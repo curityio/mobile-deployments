@@ -22,22 +22,22 @@
                             <client>
                                 <id>haapi-android-client</id>
                                 <client-name>Haapi Android Client</client-name>
-                                <secret>$5$2fpqE6shy2LpHKgg$UjLZrKEChl55JcRH6LzdoG1Fo.7DYxpaZVEoUezXWX8</secret>
+                                <secret>Password1</secret>
                                 <redirect-uris>app://haapi</redirect-uris>
                                 <proof-key>
-                                <require-proof-key>true</require-proof-key>
+                                    <require-proof-key>true</require-proof-key>
                                 </proof-key>
-                                <refresh-token-ttl>disabled</refresh-token-ttl>
+                                <refresh-token-ttl>3600</refresh-token-ttl>
                                 <audience>haapi-client</audience>
                                 <scope>openid</scope>
                                 <scope>profile</scope>
                                 <user-authentication>
                                 </user-authentication>
                                 <capabilities>
-                                <code>
-                                </code>
-                                <haapi>
-                                </haapi>
+                                    <code>
+                                    </code>
+                                    <haapi>
+                                    </haapi>
                                 </capabilities>
                                 <attestation>
                                 <android>
@@ -51,16 +51,20 @@
                                 <id>haapi-template-client</id>
                                 <client-name>haapi-template-client</client-name>
                                 <redirect-uris>app://haapi</redirect-uris>
+                                <proof-key>
+                                    <require-proof-key>true</require-proof-key>
+                                </proof-key>
+                                <refresh-token-ttl>3600</refresh-token-ttl>
                                 <scope>openid</scope>
                                 <scope>profile</scope>
                                 <user-authentication>
                                 </user-authentication>
                                 <capabilities>
-                                <code>
-                                </code>
-                                <haapi>
-                                    <allow-without-attestation>true</allow-without-attestation>
-                                </haapi>
+                                    <code>
+                                    </code>
+                                    <haapi>
+                                        <allow-without-attestation>true</allow-without-attestation>
+                                    </haapi>
                                 </capabilities>
                                 <dynamic-client-registration-template>
                                     <secret/>
