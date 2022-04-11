@@ -52,7 +52,7 @@
                                 <client-name>haapi-template-client</client-name>
                                 <redirect-uris>app://haapi</redirect-uris>
                                 <proof-key>
-                                    <require-proof-key>true</require-proof-key>
+                                    <require-proof-key>false</require-proof-key>
                                 </proof-key>
                                 <refresh-token-ttl>3600</refresh-token-ttl>
                                 <scope>openid</scope>
