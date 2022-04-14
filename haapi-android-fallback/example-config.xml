@@ -24,41 +24,30 @@
                                 <client-name>Haapi Android Client</client-name>
                                 <secret>Password1</secret>
                                 <redirect-uris>app://haapi</redirect-uris>
-                                <proof-key>
-                                    <require-proof-key>true</require-proof-key>
-                                </proof-key>
                                 <refresh-token-ttl>3600</refresh-token-ttl>
                                 <audience>haapi-client</audience>
                                 <scope>openid</scope>
                                 <scope>profile</scope>
-                                <user-authentication>
-                                </user-authentication>
                                 <capabilities>
-                                    <code>
-                                    </code>
-                                    <haapi>
-                                    </haapi>
+                                    <code/>
+                                    <haapi/>
                                 </capabilities>
                                 <attestation>
-                                <android>
-                                    <package-name>io.curity.haapidemo</package-name>
-                                    <signature-digest>Z2DKEZO2XWFWQnApoRCzhqhIxzODe7BUsArj4Up9oKQ=</signature-digest>
-                                    <android-policy>android-prod-policy</android-policy>
-                                </android>
+                                    <android>
+                                        <package-name>io.curity.haapidemo</package-name>
+                                        <signature-digest>Z2DKEZO2XWFWQnApoRCzhqhIxzODe7BUsArj4Up9oKQ=</signature-digest>
+                                        <android-policy>android-prod-policy</android-policy>
+                                    </android>
                                 </attestation>
                             </client>
                             <client>
                                 <id>haapi-template-client</id>
                                 <client-name>haapi-template-client</client-name>
                                 <redirect-uris>app://haapi</redirect-uris>
-                                <proof-key>
-                                    <require-proof-key>false</require-proof-key>
-                                </proof-key>
                                 <refresh-token-ttl>3600</refresh-token-ttl>
+                                <audience>haapi-client</audience>
                                 <scope>openid</scope>
                                 <scope>profile</scope>
-                                <user-authentication>
-                                </user-authentication>
                                 <capabilities>
                                     <code>
                                     </code>
@@ -74,6 +63,17 @@
                                     <sector-identifier>haapi-template-client</sector-identifier>
                                 </use-pairwise-subject-identifiers>
                                 <validate-port-on-loopback-interfaces>true</validate-port-on-loopback-interfaces>
+                            </client>
+                            <client>
+                                <id>introspection-client</id>
+                                <client-name>introspection-client</client-name>
+                                <secret>Password1</secret>
+                                <capabilities>
+                                    <introspection/>
+                                </capabilities>
+                                <use-pairwise-subject-identifiers>
+                                    <sector-identifier>introspection-client</sector-identifier>
+                                </use-pairwise-subject-identifiers>
                             </client>
                         </config-backed>
                     </client-store>
