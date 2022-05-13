@@ -58,7 +58,7 @@ else
 fi
 
 #
-# Copy code example resources
+# Set up sample specific configuration
 #
 cp $EXAMPLE_NAME/example-config.xml resources/
 cd resources
