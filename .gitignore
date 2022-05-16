@@ -2,3 +2,8 @@
 license.json
 output.txt
 resources/example-config.xml
+*.p12
+*.pem
+*.key
+*.bks
+*.jar
