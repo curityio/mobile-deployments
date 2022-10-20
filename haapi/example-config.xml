@@ -66,6 +66,29 @@
                                     </android>
                                 </attestation>
                             </client>
+                            <client>
+                                <id>haapi-android-ui-client</id>
+                                <client-name>Haapi Android UI Client</client-name>
+                                <no-authentication>true</no-authentication>
+                                <redirect-uris>app://haapi</redirect-uris>
+                                <audience>haapi-ui-client</audience>
+                                <scope>address</scope>
+                                <scope>email</scope>
+                                <scope>openid</scope>
+                                <scope>phone</scope>
+                                <scope>profile</scope>
+                                <capabilities>
+                                    <code/>
+                                    <haapi/>
+                                </capabilities>
+                                <attestation>
+                                    <android>
+                                        <package-name>io.curity.uiwidgetsdkfirstapp</package-name>
+                                        <signature-digest>QqGGZJ4Kzv75J1MyPtG2WA59Z1ezNIshN1o1Ayh7qU4=</signature-digest>
+                                        <android-policy>android-dev-policy</android-policy>
+                                    </android>
+                                </attestation>
+                            </client>
                         </config-backed>
                     </client-store>
                 </authorization-server>
