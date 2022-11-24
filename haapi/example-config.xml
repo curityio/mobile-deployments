@@ -11,15 +11,41 @@
 
 <data xmlns="urn:ietf:params:xml:ns:yang:ietf-restconf">
     <profiles xmlns="https://curity.se/ns/conf/base">
-        <profile>
-            <id>token-service</id>
-            <type xmlns:as="https://curity.se/ns/conf/profile/oauth">as:oauth-service</type>
-            <expose-detailed-error-messages/>
-            <settings>
-                <authorization-server xmlns="https://curity.se/ns/conf/profile/oauth">
-                    <client-store>
-                        <config-backed>
-                            <client>
+      <profile>
+        <id>authentication-service</id>
+        <type xmlns:auth="https://curity.se/ns/conf/profile/authentication">auth:authentication-service</type>
+        <settings>
+          <authentication-service xmlns="https://curity.se/ns/conf/profile/authentication">
+            <authenticators>
+              <authenticator>
+                <id>bankid</id>
+                <description>Mobilt BankID</description>
+                <bankid xmlns="https://curity.se/ns/conf/authenticators/bankid">
+                  <http-client>http</http-client>
+                  <mode>test</mode>
+                </bankid>
+              </authenticator>
+              <authenticator>
+                <id>html-form</id>
+                <description>Lösenord</description>
+                <html-form xmlns="https://curity.se/ns/conf/authenticators/html-form">
+                  <account-manager>default-account-manager</account-manager>
+                  <credential-manager>default-credential-manager</credential-manager>
+                </html-form>
+              </authenticator>
+            </authenticators>
+          </authentication-service>
+        </settings>
+      </profile>
+      <profile>
+        <id>token-service</id>
+        <type xmlns:as="https://curity.se/ns/conf/profile/oauth">as:oauth-service</type>
+        <expose-detailed-error-messages/>
+        <settings>
+          <authorization-server xmlns="https://curity.se/ns/conf/profile/oauth">
+            <client-store>
+              <config-backed>
+                <client>
                                 <id>haapi-ios-dev-client</id>
                                 <client-name>Haapi iOS Client</client-name>
                                 <no-authentication>true</no-authentication>
@@ -44,71 +70,82 @@
                                 </attestation>
                             </client>
                             <client>
-                                <id>haapi-android-client</id>
-                                <client-name>Haapi Android Client</client-name>
-                                <no-authentication>true</no-authentication>
-                                <redirect-uris>app://haapi</redirect-uris>
-                                <audience>haapi-client</audience>
-                                <scope>address</scope>
-                                <scope>email</scope>
-                                <scope>openid</scope>
-                                <scope>phone</scope>
-                                <scope>profile</scope>
-                                <capabilities>
-                                    <code/>
-                                    <haapi/>
-                                </capabilities>
-                                <attestation>
-                                    <android>
-                                        <package-name>io.curity.haapidemo</package-name>
-                                        <signature-digest>Z2DKEZO2XWFWQnApoRCzhqhIxzODe7BUsArj4Up9oKQ=</signature-digest>
-                                        <android-policy>android-dev-policy</android-policy>
-                                    </android>
-                                </attestation>
-                            </client>
-                            <client>
-                                <id>haapi-android-ui-client</id>
-                                <client-name>Haapi Android UI Client</client-name>
-                                <no-authentication>true</no-authentication>
-                                <redirect-uris>app://haapi</redirect-uris>
-                                <audience>haapi-ui-client</audience>
-                                <scope>address</scope>
-                                <scope>email</scope>
-                                <scope>openid</scope>
-                                <scope>phone</scope>
-                                <scope>profile</scope>
-                                <capabilities>
-                                    <code/>
-                                    <haapi/>
-                                </capabilities>
-                                <attestation>
-                                    <android>
-                                        <package-name>io.curity.uiwidgetsdkfirstapp</package-name>
-                                        <signature-digest>QqGGZJ4Kzv75J1MyPtG2WA59Z1ezNIshN1o1Ayh7qU4=</signature-digest>
-                                        <android-policy>android-dev-policy</android-policy>
-                                    </android>
-                                </attestation>
-                            </client>
-                        </config-backed>
-                    </client-store>
-                </authorization-server>
-            </settings>
-        </profile>
+                  <id>haapi-android-client</id>
+                  <client-name>Haapi Android Client</client-name>
+                  <no-authentication>true</no-authentication>
+                  <redirect-uris>app://haapi</redirect-uris>
+                  <audience>haapi-client</audience>
+                  <scope>address</scope>
+                  <scope>email</scope>
+                  <scope>openid</scope>
+                  <scope>phone</scope>
+                  <scope>profile</scope>
+                  <capabilities>
+                      <code/>
+                      <haapi/>
+                  </capabilities>
+                  <attestation>
+                    <android>
+                      <package-name>io.curity.haapidemo</package-name>
+                      <signature-digest>Z2DKEZO2XWFWQnApoRCzhqhIxzODe7BUsArj4Up9oKQ=</signature-digest>
+                      <android-policy>android-dev-policy</android-policy>
+                    </android>
+                  </attestation>
+                </client>
+                <client>
+                  <id>haapi-android-ui-client</id>
+                  <client-name>Haapi Android UI Client</client-name>
+                  <no-authentication>true</no-authentication>
+                  <redirect-uris>app://haapi</redirect-uris>
+                  <audience>haapi-ui-client</audience>
+                  <scope>address</scope>
+                  <scope>email</scope>
+                  <scope>openid</scope>
+                  <scope>phone</scope>
+                  <scope>profile</scope>
+                  <capabilities>
+                      <code/>
+                      <haapi/>
+                  </capabilities>
+                  <attestation>
+                    <android>
+                      <package-name>io.curity.uiwidgetsdkfirstapp</package-name>
+                      <signature-digest>QqGGZJ4Kzv75J1MyPtG2WA59Z1ezNIshN1o1Ayh7qU4=</signature-digest>
+                      <android-policy>android-dev-policy</android-policy>
+                    </android>
+                  </attestation>
+                </client>
+              </config-backed>
+            </client-store>
+            <dpop>
+              <proof-token-clock-skew>1200</proof-token-clock-skew>
+            </dpop>
+          </authorization-server>
+        </settings>
+      </profile>
     </profiles>
     <facilities xmlns="https://curity.se/ns/conf/base">
-        <client-attestation>
+      <client-attestation>
             <ios-policy xmlns="https://curity.se/ns/conf/client-attestation">
                 <id>ios-dev-policy</id>
                 <mode>non-production</mode>
             </ios-policy>
-            <android-policy xmlns="https://curity.se/ns/conf/client-attestation">
-                <id>android-dev-policy</id>
-                <verify-boot-state>false</verify-boot-state>
-                <minimum-security-level>software</minimum-security-level>
-                <override-certificate-chain-validation>
-                    <do-not-validate-certificate-chain/>
-                </override-certificate-chain-validation>
-            </android-policy>
-        </client-attestation>
+        <android-policy xmlns="https://curity.se/ns/conf/client-attestation">
+          <id>android-dev-policy</id>
+          <verify-boot-state>false</verify-boot-state>
+          <minimum-security-level>software</minimum-security-level>
+          <override-certificate-chain-validation>
+            <do-not-validate-certificate-chain/>
+          </override-certificate-chain-validation>
+        </android-policy>
+      </client-attestation>
     </facilities>
+    <processing xmlns="https://curity.se/ns/conf/base">
+      <account-managers>
+        <account-manager>
+          <id>default-account-manager</id>
+          <account-data-source>default-datasource</account-data-source>
+        </account-manager>
+      </account-managers>
+    </processing>
 </data>
