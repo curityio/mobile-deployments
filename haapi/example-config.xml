@@ -139,6 +139,11 @@
           </override-certificate-chain-validation>
         </android-policy>
       </client-attestation>
+        <http>
+            <client>
+                <id>http</id>
+            </client>
+        </http>
     </facilities>
     <processing xmlns="https://curity.se/ns/conf/base">
       <account-managers>
