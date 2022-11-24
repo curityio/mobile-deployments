@@ -26,7 +26,7 @@
                 </bankid>
               </authenticator>
               <authenticator>
-                <id>html-form</id>
+                <id>Username-Password</id>
                 <description>Lösenord</description>
                 <html-form xmlns="https://curity.se/ns/conf/authenticators/html-form">
                   <account-manager>default-account-manager</account-manager>
