@@ -29,6 +29,7 @@ services:
      - ./log4j2.xml:/opt/idsvr/etc/log4j2.xml
      - ./base-config.xml:/opt/idsvr/etc/init/config.xml
      - ./messages/messages.properties:/opt/idsvr/usr/share/messages/overrides/en/authenticator/html-form/authenticate/messages.properties
+     - ./messages/attribute-prompt:/opt/idsvr/usr/share/messages/overrides/en/authentication-action/attribute-prompt/messages
     environment:
       PASSWORD: 'Password1'
       RUNTIME_PROTOCOL: "${RUNTIME_PROTOCOL}"
