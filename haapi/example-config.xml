@@ -62,6 +62,7 @@
                                     <android>
                                         <package-name>io.curity.haapidemo</package-name>
                                         <signature-digest>Z2DKEZO2XWFWQnApoRCzhqhIxzODe7BUsArj4Up9oKQ=</signature-digest>
+                                        <signature-digest>QqGGZJ4Kzv75J1MyPtG2WA59Z1ezNIshN1o1Ayh7qU4=</signature-digest>
                                         <android-policy>android-dev-policy</android-policy>
                                     </android>
                                 </attestation>
