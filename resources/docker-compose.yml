@@ -25,7 +25,6 @@ services:
      - 8443:8443
     volumes:
      - ./license.json:/opt/idsvr/etc/init/license/license.json
-     - ./log4j2.xml:/opt/idsvr/etc/log4j2.xml
      - ./base-config.xml:/opt/idsvr/etc/init/config.xml
     environment:
       PASSWORD: 'Password1'
