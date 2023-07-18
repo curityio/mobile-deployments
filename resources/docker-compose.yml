@@ -26,6 +26,7 @@ services:
     volumes:
      - ./license.json:/opt/idsvr/etc/init/license/license.json
      - ./base-config.xml:/opt/idsvr/etc/init/config.xml
+     - ./messages/attribute-prompt:/opt/idsvr/usr/share/messages/overrides/en/authentication-action/attribute-prompt/messages
     environment:
       PASSWORD: 'Password1'
       RUNTIME_PROTOCOL: "${RUNTIME_PROTOCOL}"
