@@ -35,19 +35,6 @@ if [ "$EXAMPLE_NAME" == '' ] || [ "$BASE_URL" == '' ]; then
 fi
 
 #
-# Default some parameters
-#
-if [ "$ANDROID_FINGERPRINT" == '' ]; then
-  ANDROID_FINGERPRINT='67:60:CA:11:93:B6:5D:61:56:42:70:29:A1:10:B3:86:A8:48:C7:33:83:7B:B0:54:B0:0A:E3:E1:4A:7D:A0:A4'
-fi
-if [ "$ANDROID_SIGNATURE_DIGEST" == '' ]; then
-  ANDROID_SIGNATURE_DIGEST='Z2DKEZO2XWFWQnApoRCzhqhIxzODe7BUsArj4Up9oKQ='
-fi
-if [ "$APPLE_TEAM_ID" == '' ]; then
-  APPLE_TEAM_ID='MYTEAMID'
-fi
-
-#
 # If required, get a trusted SSL internet URL that mobile apps or simulators can connect to
 # This enables mobile associated domain files to be hosted
 #
@@ -71,17 +58,10 @@ else
 fi
 
 #
-# Export all variables
+# Deploy the Curity Identity server
 #
 export RUNTIME_PROTOCOL
 export RUNTIME_BASE_URL
-export APPLE_TEAM_ID
-export ANDROID_FINGERPRINT
-export ANDROID_SIGNATURE_DIGEST
-
-#
-# Deploy the Curity Identity server
-#
 cd resources
 docker compose --project-name $EXAMPLE_NAME up --detach --force-recreate
 if [ $? -ne 0 ]; then
@@ -101,14 +81,31 @@ while [ "$(curl -k -s -o /dev/null -w ''%{http_code}'' -u "$ADMIN_USER:$ADMIN_PA
 done
 
 #
-# Produce the final configuration for the code example from environment variables
+# For the HAAPI example, produce the final code example configuration from environment variables
 #
 cd ../$EXAMPLE_NAME
-envsubst < example-config-template.xml > example-config.xml
-if [ $? -ne 0 ]; then
-  echo 'Problem encountered using envsubst to update example configuration'
-  exit 1
+if [ "$EXAMPLE_NAME" == 'haapi' ]; then
+
+  if [ "$ANDROID_FINGERPRINT" == '' ]; then
+    ANDROID_FINGERPRINT='67:60:CA:11:93:B6:5D:61:56:42:70:29:A1:10:B3:86:A8:48:C7:33:83:7B:B0:54:B0:0A:E3:E1:4A:7D:A0:A4'
+  fi
+  if [ "$ANDROID_SIGNATURE_DIGEST" == '' ]; then
+    ANDROID_SIGNATURE_DIGEST='Z2DKEZO2XWFWQnApoRCzhqhIxzODe7BUsArj4Up9oKQ='
+  fi
+  if [ "$APPLE_TEAM_ID" == '' ]; then
+    APPLE_TEAM_ID='MYTEAMID'
+  fi
+
+  export APPLE_TEAM_ID
+  export ANDROID_FINGERPRINT
+  export ANDROID_SIGNATURE_DIGEST
+  envsubst < example-config-template.xml > example-config.xml
+  if [ $? -ne 0 ]; then
+    echo 'Problem encountered using envsubst to update example configuration'
+    exit 1
+  fi
 fi
+
 #
 # Apply the code example's specific configuration via a RESTCONF PATCH
 #
