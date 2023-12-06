@@ -62,7 +62,7 @@ if [ "$USE_NGROK" == 'true' ]; then
     exit 1
   fi
 else
-  RUNTIME_BASE_URL="IDSVR_BASE_URL"
+  RUNTIME_BASE_URL="$IDSVR_BASE_URL"
   if [[ "$IDSVR_BASE_URL" == https* ]]; then
     RUNTIME_PROTOCOL="https"
   else
