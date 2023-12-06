@@ -35,16 +35,16 @@ fi
 # Default some parameters
 #
 if [ "$IDSVR_BASE_URL" == '' ]; then
-  IDSVR_BASE_URL='http://localhost:8443'
-fi
-if [ "$APPLE_TEAM_ID" == '' ]; then
-  APPLE_TEAM_ID='MYTEAMID'
+  IDSVR_BASE_URL='https://localhost:8443'
 fi
 if [ "$ANDROID_FINGERPRINT" == '' ]; then
   ANDROID_FINGERPRINT='67:60:CA:11:93:B6:5D:61:56:42:70:29:A1:10:B3:86:A8:48:C7:33:83:7B:B0:54:B0:0A:E3:E1:4A:7D:A0:A4'
 fi
 if [ "$ANDROID_SIGNATURE_DIGEST" == '' ]; then
   ANDROID_SIGNATURE_DIGEST='Z2DKEZO2XWFWQnApoRCzhqhIxzODe7BUsArj4Up9oKQ='
+fi
+if [ "$APPLE_TEAM_ID" == '' ]; then
+  APPLE_TEAM_ID='MYTEAMID'
 fi
 
 #
@@ -55,18 +55,18 @@ if [ "$USE_NGROK" == 'true' ]; then
   kill -9 $(pgrep ngrok) 2>/dev/null
   ngrok http 8443 -log=stdout &
   sleep 5
-  export RUNTIME_BASE_URL=$(curl -s http://localhost:4040/api/tunnels | jq -r '.tunnels[] | select(.proto == "https") | .public_url')
-  export RUNTIME_PROTOCOL="http"
+  RUNTIME_BASE_URL=$(curl -s http://localhost:4040/api/tunnels | jq -r '.tunnels[] | select(.proto == "https") | .public_url')
+  RUNTIME_PROTOCOL="http"
   if [ "$RUNTIME_BASE_URL" == "" ]; then
     echo 'Problem encountered getting an NGROK URL'
     exit 1
   fi
 else
-  export RUNTIME_BASE_URL="IDSVR_BASE_URL"
-  if [[ "$BASE_URL" == https* ]]; then
-    export RUNTIME_PROTOCOL="https"
+  RUNTIME_BASE_URL="IDSVR_BASE_URL"
+  if [[ "$IDSVR_BASE_URL" == https* ]]; then
+    RUNTIME_PROTOCOL="https"
   else
-    export RUNTIME_PROTOCOL="http"
+    RUNTIME_PROTOCOL="http"
   fi
 fi
 
@@ -75,6 +75,17 @@ fi
 #
 cp $EXAMPLE_NAME/example-config.xml resources/
 cd resources
+
+#
+# Export all variables
+#
+export RUNTIME_PROTOCOL
+export RUNTIME_BASE_URL
+export APPLE_TEAM_ID
+export ANDROID_FINGERPRINT
+export ANDROID_SIGNATURE_DIGEST
+echo '*** DEBUG'
+echo $RUNTIME_BASE_URL
 
 #
 # Deploy the Curity Identity server
