@@ -90,16 +90,6 @@ if [ $? -ne 0 ]; then
 fi
 
 #
-# Produce the final configuration for the code example from environment variables
-#
-cp ../$EXAMPLE_NAME/example-config-template.xml .
-envsubst < example-config-template.xml > example-config.xml
-if [ $? -ne 0 ]; then
-  echo 'Problem encountered using envsubst to update example configuration'
-  exit 1
-fi
-
-#
 # Wait for endpoints to become available
 #
 echo 'Waiting for the Curity Identity Server ...'
@@ -110,6 +100,18 @@ while [ "$(curl -k -s -o /dev/null -w ''%{http_code}'' -u "$ADMIN_USER:$ADMIN_PA
   sleep 2
 done
 
+#
+# Produce the final configuration for the code example from environment variables
+#
+echo '*** DEBUG'
+echo $EXAMPLE_NAME
+cd ../$EXAMPLE_NAME
+ls
+envsubst < example-config-template.xml > example-config.xml
+if [ $? -ne 0 ]; then
+  echo 'Problem encountered using envsubst to update example configuration'
+  exit 1
+fi
 #
 # Apply the code example's specific configuration via a RESTCONF PATCH
 #
