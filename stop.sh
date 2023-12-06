@@ -1,21 +1,19 @@
 #!/bin/bash
 
-###############################################################
-# Free mobile OAuth setup resources for the mobile code example
-###############################################################
+#########################################################################
+# A script to teardown an automated OAuth setup for a mobile code example
+#########################################################################
 
 #
 # Change to this folder
 #
 cd "$(dirname "${BASH_SOURCE[0]}")"
-USE_NGROK="$1"
-EXAMPLE_NAME="$2"
 
 #
 # Check for valid input
 #
-if [ "$USE_NGROK" == '' ] || [ "$EXAMPLE_NAME" == '' ]; then
-  echo 'Incorrect command line arguments supplied to the stop.sh script'
+if [ "$EXAMPLE_NAME" == '' ]; then
+  echo 'An EXAMPLE_NAME environment variable must be supplied to the stop.sh script'
   exit 1
 fi
 
