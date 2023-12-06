@@ -82,6 +82,7 @@ export ANDROID_SIGNATURE_DIGEST
 #
 # Deploy the Curity Identity server
 #
+cd resources
 docker compose --project-name $EXAMPLE_NAME up --detach --force-recreate
 if [ $? -ne 0 ]; then
   echo 'Problem encountered starting Docker components'
@@ -89,14 +90,9 @@ if [ $? -ne 0 ]; then
 fi
 
 #
-# Set up sample specific configuration
+# Produce the final configuration for the code example from environment variables
 #
-cp $EXAMPLE_NAME/example-config-template.xml resources/
-cd resources
-
-#
-# Update configuration dynamically
-#
+cp ../$EXAMPLE_NAME/example-config-template.xml .
 envsubst < example-config-template.xml > example-config.xml
 if [ $? -ne 0 ]; then
   echo 'Problem encountered using envsubst to update example configuration'
