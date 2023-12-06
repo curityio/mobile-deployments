@@ -1,7 +1,7 @@
 .DS_Store
 license.json
 output.txt
-resources/example-config.xml
+example-config.xml
 *.p12
 *.pem
 *.key
