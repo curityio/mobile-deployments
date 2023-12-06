@@ -34,16 +34,16 @@ fi
 #
 # Default some parameters
 #
-if [ "$IDSVR_BASE_URL" == '' ]
+if [ "$IDSVR_BASE_URL" == '' ]; then
   IDSVR_BASE_URL='http://localhost:8443'
 fi
-if [ "$APPLE_TEAM_ID" == '' ]
+if [ "$APPLE_TEAM_ID" == '' ]; then
   APPLE_TEAM_ID='MYTEAMID'
 fi
-if [ "$ANDROID_FINGERPRINT" == '' ]
+if [ "$ANDROID_FINGERPRINT" == '' ]; then
   ANDROID_FINGERPRINT='67:60:CA:11:93:B6:5D:61:56:42:70:29:A1:10:B3:86:A8:48:C7:33:83:7B:B0:54:B0:0A:E3:E1:4A:7D:A0:A4'
 fi
-if [ "$ANDROID_SIGNATURE_DIGEST" == '' ]
+if [ "$ANDROID_SIGNATURE_DIGEST" == '' ]; then
   ANDROID_SIGNATURE_DIGEST='Z2DKEZO2XWFWQnApoRCzhqhIxzODe7BUsArj4Up9oKQ='
 fi
 
@@ -86,7 +86,7 @@ if [ $? -ne 0 ]; then
 fi
 
 #
-# Wait for the Identity Server to become available
+# Wait for endpoints to become available
 #
 echo 'Waiting for the Curity Identity Server ...'
 RESTCONF_BASE_URL='https://localhost:6749/admin/api/restconf/data'
