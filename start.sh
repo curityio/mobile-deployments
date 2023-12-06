@@ -26,17 +26,17 @@ fi
 # AppAuth examples work with a community edition license file
 # HAAPI examples require a paid license file
 #
-if [ "$EXAMPLE_NAME" == '' ]; then
-  echo 'An EXAMPLE_NAME environment variable must be supplied to the start.sh script'
+USE_NGROK="$1"
+BASE_URL="$2"
+EXAMPLE_NAME="$3"
+if [ "$EXAMPLE_NAME" == '' ] || [ "$BASE_URL" == '' ]; then
+  echo 'Incorrect command line arguments supplied to the start.sh script'
   exit 1
 fi
 
 #
 # Default some parameters
 #
-if [ "$IDSVR_BASE_URL" == '' ]; then
-  IDSVR_BASE_URL='https://localhost:8443'
-fi
 if [ "$ANDROID_FINGERPRINT" == '' ]; then
   ANDROID_FINGERPRINT='67:60:CA:11:93:B6:5D:61:56:42:70:29:A1:10:B3:86:A8:48:C7:33:83:7B:B0:54:B0:0A:E3:E1:4A:7D:A0:A4'
 fi
@@ -62,8 +62,8 @@ if [ "$USE_NGROK" == 'true' ]; then
     exit 1
   fi
 else
-  RUNTIME_BASE_URL="$IDSVR_BASE_URL"
-  if [[ "$IDSVR_BASE_URL" == https* ]]; then
+  RUNTIME_BASE_URL="$BASE_URL"
+  if [[ "$BASE_URL" == https* ]]; then
     RUNTIME_PROTOCOL="https"
   else
     RUNTIME_PROTOCOL="http"
