@@ -53,7 +53,7 @@ fi
 #
 if [ "$USE_NGROK" == 'true' ]; then
   kill -9 $(pgrep ngrok) 2>/dev/null
-  ngrok http 8443 -log=stdout &
+  ngrok http 8443 --log=stdout &
   sleep 5
   RUNTIME_BASE_URL=$(curl -s http://localhost:4040/api/tunnels | jq -r '.tunnels[] | select(.proto == "https") | .public_url')
   RUNTIME_PROTOCOL="http"
@@ -103,10 +103,7 @@ done
 #
 # Produce the final configuration for the code example from environment variables
 #
-echo '*** DEBUG'
-echo $EXAMPLE_NAME
 cd ../$EXAMPLE_NAME
-ls
 envsubst < example-config-template.xml > example-config.xml
 if [ $? -ne 0 ]; then
   echo 'Problem encountered using envsubst to update example configuration'
