@@ -4,9 +4,6 @@
 # A script to teardown an automated OAuth setup for a mobile code example
 #########################################################################
 
-#
-# Change to this folder
-#
 cd "$(dirname "${BASH_SOURCE[0]}")"
 
 #

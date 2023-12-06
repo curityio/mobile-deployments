@@ -4,9 +4,6 @@
 # A script to provide an automated OAuth setup for a mobile code example
 ########################################################################
 
-#
-# Change to this folder and accept input
-#
 cd "$(dirname "${BASH_SOURCE[0]}")"
 
 #
@@ -37,8 +34,8 @@ fi
 #
 # Default some parameters
 #
-if [ "$BASE_URL" == '' ]
-  BASE_URL='https://localhost:8443'
+if [ "$IDSVR_BASE_URL" == '' ]
+  IDSVR_BASE_URL='http://localhost:8443'
 fi
 if [ "$APPLE_TEAM_ID" == '' ]
   APPLE_TEAM_ID='MYTEAMID'
@@ -65,7 +62,7 @@ if [ "$USE_NGROK" == 'true' ]; then
     exit 1
   fi
 else
-  export RUNTIME_BASE_URL="$BASE_URL"
+  export RUNTIME_BASE_URL="IDSVR_BASE_URL"
   if [[ "$BASE_URL" == https* ]]; then
     export RUNTIME_PROTOCOL="https"
   else
@@ -119,4 +116,3 @@ fi
 #
 cd ..
 echo "$RUNTIME_BASE_URL">./output.txt
-exit 0
