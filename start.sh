@@ -84,8 +84,6 @@ export RUNTIME_BASE_URL
 export APPLE_TEAM_ID
 export ANDROID_FINGERPRINT
 export ANDROID_SIGNATURE_DIGEST
-echo '*** DEBUG'
-echo $RUNTIME_BASE_URL
 
 #
 # Deploy the Curity Identity server
