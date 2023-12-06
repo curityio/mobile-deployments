@@ -31,7 +31,7 @@
                                 <scope>openid</scope>
                                 <scope>profile</scope>
                                 <user-authentication>
-                                    <allowed-authenticators>Username-Password</allowed-authenticators>
+                                    <allowed-authenticators>HtmlForm</allowed-authenticators>
                                     <allowed-post-logout-redirect-uris>io.curity.client:/logoutcallback</allowed-post-logout-redirect-uris>
                                 </user-authentication>
                                 <capabilities>
