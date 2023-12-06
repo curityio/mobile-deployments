@@ -71,12 +71,6 @@ else
 fi
 
 #
-# Set up sample specific configuration
-#
-cp $EXAMPLE_NAME/example-config.xml resources/
-cd resources
-
-#
 # Export all variables
 #
 export RUNTIME_PROTOCOL
@@ -95,15 +89,10 @@ if [ $? -ne 0 ]; then
 fi
 
 #
-# Wait for endpoints to become available
+# Set up sample specific configuration
 #
-echo 'Waiting for the Curity Identity Server ...'
-RESTCONF_BASE_URL='https://localhost:6749/admin/api/restconf/data'
-ADMIN_USER='admin'
-ADMIN_PASSWORD='Password1'
-while [ "$(curl -k -s -o /dev/null -w ''%{http_code}'' -u "$ADMIN_USER:$ADMIN_PASSWORD" "$RESTCONF_BASE_URL?content=config")" != "200" ]; do
-  sleep 2
-done
+cp $EXAMPLE_NAME/example-config-template.xml resources/
+cd resources
 
 #
 # Update configuration dynamically
@@ -113,6 +102,17 @@ if [ $? -ne 0 ]; then
   echo 'Problem encountered using envsubst to update example configuration'
   exit 1
 fi
+
+#
+# Wait for endpoints to become available
+#
+echo 'Waiting for the Curity Identity Server ...'
+RESTCONF_BASE_URL='https://localhost:6749/admin/api/restconf/data'
+ADMIN_USER='admin'
+ADMIN_PASSWORD='Password1'
+while [ "$(curl -k -s -o /dev/null -w ''%{http_code}'' -u "$ADMIN_USER:$ADMIN_PASSWORD" "$RESTCONF_BASE_URL?content=config")" != "200" ]; do
+  sleep 2
+done
 
 #
 # Apply the code example's specific configuration via a RESTCONF PATCH

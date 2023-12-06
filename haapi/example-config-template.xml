@@ -18,13 +18,13 @@
                     <default-zone>
                         <mobile-app-association>
                             <ios-app-configuration>
-                                <app-id>#{APPLE_TEAM_ID}.io.curity.haapidemo</app-id>
+                                <app-id>$APPLE_TEAM_ID.io.curity.haapidemo</app-id>
                             </ios-app-configuration>
                             <android-app-configuration>
                                 <namespace>android_app</namespace>
                                 <package-name>io.curity.haapidemo</package-name>
                                 <sha256-cert-fingerprints>
-                                    <fingerprint>#{ANDROID_FINGERPRINT}</fingerprint>
+                                    <fingerprint>$ANDROID_FINGERPRINT</fingerprint>
                                 </sha256-cert-fingerprints>
                             </android-app-configuration>
                         </mobile-app-association>
@@ -103,7 +103,7 @@
                                 <attestation>
                                     <android>
                                         <package-name>io.curity.haapidemo</package-name>
-                                        <signature-digest>#{ANDROID_SIGNATURE_DIGEST}</signature-digest>
+                                        <signature-digest>$ANDROID_SIGNATURE_DIGEST</signature-digest>
                                         <android-policy>android-dev-policy</android-policy>
                                     </android>
                                 </attestation>
