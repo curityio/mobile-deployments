@@ -63,7 +63,8 @@ fi
 export RUNTIME_PROTOCOL
 export RUNTIME_BASE_URL
 cd resources
-docker compose --project-name $EXAMPLE_NAME up --detach --force-recreate
+docker compose --project-name $EXAMPLE_NAME down
+docker compose --project-name $EXAMPLE_NAME up --detach
 if [ $? -ne 0 ]; then
   echo 'Problem encountered starting Docker components'
   exit 1
