@@ -85,7 +85,7 @@ while [ "$(curl -k -s -o /dev/null -w ''%{http_code}'' -u "$ADMIN_USER:$ADMIN_PA
 done
 
 #
-# For the HAAPI example, support some optional updates
+# For the HAAPI example, update configuration dynamically
 #
 cd ../$EXAMPLE_NAME
 if [ "$EXAMPLE_NAME" == 'haapi' ]; then
