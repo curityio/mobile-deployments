@@ -9,6 +9,8 @@ cd "$(dirname "${BASH_SOURCE[0]}")"
 #
 # Check for valid input
 #
+USE_NGROK="$1"
+EXAMPLE_NAME="$2"
 if [ "$EXAMPLE_NAME" == '' ]; then
   echo 'An EXAMPLE_NAME environment variable must be supplied to the stop.sh script'
   exit 1
