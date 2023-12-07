@@ -97,9 +97,9 @@ if [ "$EXAMPLE_NAME" == 'haapi' ]; then
     ANDROID_SIGNATURE_DIGEST='Z2DKEZO2XWFWQnApoRCzhqhIxzODe7BUsArj4Up9oKQ='
   fi
   if [ "$APPLE_APP_ID" == '' ]; then
-    APPLE_TEAM_ID='io.curity.cat.ios.client'
+    APPLE_APP_ID='io.curity.cat.ios.client'
   fi
-  if [ "$APPLE_APP_ID" == '' ]; then
+  if [ "$APPLE_TEAM_ID" == '' ]; then
     APPLE_TEAM_ID='MYTEAMID'
   fi
 
