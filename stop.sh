@@ -28,4 +28,4 @@ fi
 #
 export RUNTIME_PROTOCOL='' 
 export RUNTIME_BASE_URL=''
-docker compose --project-name $EXAMPLE_NAME down
+docker compose --project-name mobile down

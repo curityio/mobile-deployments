@@ -39,9 +39,12 @@ fi
 # This enables mobile associated domain files to be hosted
 #
 if [ "$USE_NGROK" == 'true' ]; then
-  kill -9 $(pgrep ngrok) 2>/dev/null
-  ngrok http 8443 --log=stdout &
-  sleep 5
+  
+  if [ "$(pgrep ngrok)" == '' ]; then
+    ngrok http 8443 --log=stdout &
+    sleep 5
+  fi
+
   RUNTIME_BASE_URL=$(curl -s http://localhost:4040/api/tunnels | jq -r '.tunnels[] | select(.proto == "https") | .public_url')
   RUNTIME_PROTOCOL="http"
   if [ "$RUNTIME_BASE_URL" == "" ]; then
@@ -82,7 +85,7 @@ while [ "$(curl -k -s -o /dev/null -w ''%{http_code}'' -u "$ADMIN_USER:$ADMIN_PA
 done
 
 #
-# For the HAAPI example, produce the final code example configuration from environment variables
+# For the HAAPI example, support some optional updates
 #
 cd ../$EXAMPLE_NAME
 if [ "$EXAMPLE_NAME" == 'haapi' ]; then
