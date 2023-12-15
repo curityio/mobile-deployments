@@ -20,7 +20,7 @@ services:
   curity-idsvr:
     # TODO: set back to latest before release
     #image: curity.azurecr.io/curity/idsvr:latest
-    image: curity/idsvr-unstable:8.7.0-c56cf227cc
+    image: curity/idsvr-unstable:8.7.0-ef28958e90
     hostname: curityserver
     ports:
      - 6749:6749
