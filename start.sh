@@ -39,7 +39,7 @@ fi
 # This enables mobile associated domain files to be hosted
 #
 if [ "$USE_NGROK" == 'true' ]; then
-  
+
   if [ "$(pgrep ngrok)" == '' ]; then
     ngrok http 8443 --log=stdout &
     sleep 5
