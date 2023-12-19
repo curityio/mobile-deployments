@@ -66,6 +66,10 @@ fi
 export RUNTIME_PROTOCOL
 export RUNTIME_BASE_URL
 cd resources
+
+# Ensure the latest Curity Identity Server image is used
+docker pull curity.azurecr.io/curity/idsvr
+
 docker compose --project-name $EXAMPLE_NAME down
 docker compose --project-name $EXAMPLE_NAME up --detach
 if [ $? -ne 0 ]; then
