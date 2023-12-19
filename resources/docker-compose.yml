@@ -18,7 +18,9 @@ services:
   # A standalone instance of the Curity Identity Server
   #
   curity-idsvr:
-    image: curity.azurecr.io/curity/idsvr:latest
+    # TODO: set back to latest before release
+    #image: curity.azurecr.io/curity/idsvr:latest
+    image: curity/idsvr-unstable:8.7.0-ef28958e90
     hostname: curityserver
     ports:
      - 6749:6749
