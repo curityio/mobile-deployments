@@ -74,10 +74,10 @@
                                 <scope>phone</scope>
                                 <scope>profile</scope>
                                 <capabilities>
-                                <code/>
-                                <haapi>
-                                    <issue-token-bound-authorization-code>true</issue-token-bound-authorization-code>
-                                </haapi>
+                                    <code/>
+                                    <haapi>
+                                        <issue-token-bound-authorization-code>true</issue-token-bound-authorization-code>
+                                    </haapi>
                                 </capabilities>
                                 <attestation>
                                 <disable-attestation-validation>true</disable-attestation-validation>
@@ -100,7 +100,9 @@
                                 <scope>profile</scope>
                                 <capabilities>
                                     <code/>
-                                    <haapi/>
+                                    <haapi>
+                                        <issue-token-bound-authorization-code>true</issue-token-bound-authorization-code>
+                                    </haapi>
                                 </capabilities>
                                 <attestation>
                                     <android>
