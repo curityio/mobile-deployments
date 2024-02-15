@@ -334,3 +334,15 @@ COMMENT ON COLUMN buckets.purpose IS 'The purpose of this bucket, eg. "login_att
 COMMENT ON COLUMN buckets.attributes IS 'All attributes stored for this subject/purpose';
 COMMENT ON COLUMN buckets.created IS 'When this bucket was created';
 COMMENT ON COLUMN buckets.updated IS 'When this bucket was last updated';
+
+--
+-- Restore the test user account and its password credential
+--
+
+COPY accounts (account_id, username, password, email, phone, attributes, active, created, updated) FROM stdin;
+79b6852c-8062-403b-b0a9-3b19d7175233	demouser	\N	demo@user.com	07711	{"name": {"givenName": "Demo", "familyName": "User"}, "emails": [{"value": "demo@user.com", "primary": true}], "agreeToTerms": "on", "phoneNumbers": [{"value": "07711", "primary": true}], "urn:se:curity:scim:2.0:Devices": []}	1	1708008810	1708008810
+\.
+
+COPY credentials (id, subject, password, attributes, created, updated) FROM stdin;
+6a273e20-6015-4243-8117-44379cadf582	demouser	$5$rounds=20000$p32Fp4ecezzC0BSk$kaqe1ol1ShkqespXd9QiX.NNRasd0nOOQiC6ES1wOiB	{}	2024-02-15 14:53:30.623009	2024-02-15 14:53:30.623009
+\.
