@@ -44,9 +44,10 @@
                             <id>Passkeys</id>
                             <required-authenticator-for-registration>HtmlForm</required-authenticator-for-registration>
                             <passkeys xmlns="https://curity.se/ns/conf/authenticators/passkeys">
-                            <account-manager>
+                              <enable-discoverable-credentials>true</enable-discoverable-credentials>
+                              <account-manager>
                                 <id>default-account-manager</id>
-                            </account-manager>
+                              </account-manager>
                             </passkeys>
                         </authenticator>
                     </authenticators>
