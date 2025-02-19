@@ -63,10 +63,10 @@
                     <client-store>
                         <config-backed>
                             <client>
-                                <id>haapi-ios-dev-client</id>
+                                <id>haapi-ios-client</id>
                                 <client-name>Haapi iOS Client</client-name>
                                 <no-authentication>true</no-authentication>
-                                <redirect-uris>haapi://</redirect-uris>
+                                <redirect-uris>haapi://callback</redirect-uris>
                                 <user-authentication>
                                 </user-authentication>
                                 <scope>address</scope>
@@ -92,7 +92,7 @@
                                 <id>haapi-android-client</id>
                                 <client-name>Haapi Android Client</client-name>
                                 <no-authentication>true</no-authentication>
-                                <redirect-uris>haapi://</redirect-uris>
+                                <redirect-uris>haapi://callback</redirect-uris>
                                 <audience>haapi-client</audience>
                                 <scope>address</scope>
                                 <scope>email</scope>
