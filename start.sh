@@ -94,6 +94,10 @@ done
 cd ../$EXAMPLE_NAME
 if [ "$EXAMPLE_NAME" == 'haapi' ]; then
 
+  if [ "$ANDROID_PACKAGE_NAME" == '' ]; then
+    ANDROID_PACKAGE_NAME='io.curity.haapidemo'
+  fi
+
   if [ "$ANDROID_FINGERPRINT" == '' ]; then
     ANDROID_FINGERPRINT='67:60:CA:11:93:B6:5D:61:56:42:70:29:A1:10:B3:86:A8:48:C7:33:83:7B:B0:54:B0:0A:E3:E1:4A:7D:A0:A4'
   fi
@@ -107,6 +111,7 @@ if [ "$EXAMPLE_NAME" == 'haapi' ]; then
     APPLE_TEAM_ID='MYTEAMID'
   fi
 
+  export ANDROID_PACKAGE_NAME
   export APPLE_APP_ID
   export APPLE_TEAM_ID
   export ANDROID_FINGERPRINT

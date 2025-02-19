@@ -22,7 +22,7 @@
                             </ios-app-configuration>
                             <android-app-configuration>
                                 <namespace>android_app</namespace>
-                                <package-name>io.curity.haapidemo</package-name>
+                                <package-name>$ANDROID_PACKAGE_NAME</package-name>
                                 <sha256-cert-fingerprints>
                                     <fingerprint>$ANDROID_FINGERPRINT</fingerprint>
                                 </sha256-cert-fingerprints>
@@ -107,7 +107,7 @@
                                 </capabilities>
                                 <attestation>
                                     <android>
-                                        <package-name>io.curity.haapidemo</package-name>
+                                        <package-name>$ANDROID_PACKAGE_NAME</package-name>
                                         <signature-digest>$ANDROID_SIGNATURE_DIGEST</signature-digest>
                                         <android-policy>android-dev-policy</android-policy>
                                     </android>
