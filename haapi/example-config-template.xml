@@ -18,7 +18,7 @@
                     <default-zone>
                         <mobile-app-association>
                             <ios-app-configuration>
-                                <app-id>$APPLE_TEAM_ID.$APPLE_APP_ID</app-id>
+                                <app-id>$APPLE_TEAM_ID.$APPLE_BUNDLE_ID</app-id>
                             </ios-app-configuration>
                             <android-app-configuration>
                                 <namespace>android_app</namespace>
@@ -83,7 +83,7 @@
                                 <attestation>
                                 <disable-attestation-validation>true</disable-attestation-validation>
                                 <ios>
-                                    <app-id>$APPLE_APP_ID</app-id>
+                                    <app-id>$APPLE_BUNDLE_ID</app-id>
                                     <ios-policy>ios-dev-policy</ios-policy>
                                 </ios>
                                 </attestation>
