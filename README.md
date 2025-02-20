@@ -1,38 +1,39 @@
 # Mobile Deployments
 
-Resources for automating the setup of Curity mobile code examples.
+Automated deployments of the Curity Identity Server to provide fast working mobile setups.\
+This repository provides a consistent developer experience for anyone who wants to run mobile examples.
 
-## Usage
+## Example Applications
 
-This repository is a Git submodule referenced by the below code examples.\
-Run the `./start-idsvr.sh` script for a code example to configure a working mobile OAuth setup.
+The following applications use this repository:
 
-## HAAPI Code Examples
+- [Android Kotlin AppAuth Code Example](https://curity.io/resources/learn/kotlin-android-appauth/)
+- [iOS Swift AppAuth Code Example](https://curity.io/resources/learn/swift-ios-appauth/)
+- [Advanced AppAuth code example using Dynamic Client Registration](https://curity.io/resources/learn/authenticated-dcr-example/)
+- [Android Kotlin HAAPI UI SDK Code Example](https://curity.io/resources/learn/kotlin-android-haapi/)
+- [iOS Swift HAAPI UI SDK Code Example](https://curity.io/resources/learn/swift-ios-haapi/)
+- [React Native HAAPI Code Example](https://curity.io/resources/learn/react-native-haapi/)
+- [Android Kotlin HAAPI Model SDK Code Example](https://github.com/curityio/android-haapi-demo-app)
+- [iOS Swaift HAAPI Model SDK Code Example](https://github.com/curityio/ios-haapi-demo-app)
 
-How to implement OpenID Connect using the Hypermedia Authentication API:
+## Deployment Interface
 
-| Platform | Github Repository |
-| -------- | ----------------- |
-| iOS | https://github.com/curityio/ios-haapi-demo-app |
-| Android | https://github.com/curityio/android-haapi-demo-app |
+Each mobile example calls the following script with parameters to start and stop the Curity Identity Server:
 
-## AppAuth Basic Code Examples
+```bash
+./start.sh
+./stop.sh
+```
 
-How to implement OpenID Connect using the AppAuth Pattern:
+## Configuration
 
-| Platform | Github Repository |
-| -------- | ----------------- |
-| iOS | https://github.com/curityio/openid-client-ios-appauth |
-| Android | https://github.com/curityio/openid-client-android-appauth |
+The files in the `resources` folder provide base behaviors related to data and user accounts.\
+Different deployment scenarios can use their own configuration files and supply parameters.
 
-## AppAuth with Dynamic Client Registration
+For example, HAAPI deployments require a number of technical configuration settings.\
+You can study the resources for a particular code example and apply them to your deployed deployments.
 
-How to implement OpenID Connect with a unique mobile client per device:
-
-| Platform | Github Repository |
-| -------- | ----------------- |
-| iOS | https://github.com/curityio/openid-client-ios-appauth-dcr |
-| Android | https://github.com/curityio/openid-client-android-appauth-dcr |
+- [HAAPI configuration](haapi/example-config-template.xml)
 
 ## More Information
 

@@ -24,7 +24,8 @@ services:
      - 8443:8443
     volumes:
      - ./license.json:/opt/idsvr/etc/init/license/license.json
-     - ./base-config.xml:/opt/idsvr/etc/init/config.xml
+     - ./base-config.xml:/opt/idsvr/etc/init/base-config.xml
+     - ./devops-dashboard.xml:/opt/idsvr/etc/init/devops-dashboard.xml
      - ./messages/attribute-prompt:/opt/idsvr/usr/share/messages/overrides/en/authentication-action/attribute-prompt/messages
      - ./customizations/htmlform.vm:/opt/idsvr/usr/share/templates/overrides/authenticator/html-form/authenticate/get.vm
     environment:
