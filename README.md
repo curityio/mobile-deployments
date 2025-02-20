@@ -27,13 +27,11 @@ Each mobile example calls the following script with parameters to start and stop
 
 ## Configuration
 
-The files in the `resources` folder provide base configuration.\
-Different deployment scenarios can apply specific configuration files or override parameters.
+The files in the `resources` folder provide the base configuration.\
+Each code example can apply additional configuration based on its requirements:
 
-For example, HAAPI deployments require a number of technical configuration settings.\
-You can study the resources for a particular code example and apply them to your deployed deployments.
-
-- [HAAPI configuration](haapi/example-config-template.xml)
+- Examples can use default configuration files stored in this project, e.g. in the `appauth` folder.
+- Examples can override configuration by copying in their own configuration files, e.g to the `haapi` folder.
 
 ## Administration and Users
 

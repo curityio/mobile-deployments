@@ -18,13 +18,13 @@
                     <default-zone>
                         <mobile-app-association>
                             <ios-app-configuration>
-                                <app-id>$APPLE_TEAM_ID.$APPLE_BUNDLE_ID</app-id>
+                                <app-id>MYTEAMID.io.curity.cat.ios.client</app-id>
                             </ios-app-configuration>
                             <android-app-configuration>
                                 <namespace>android_app</namespace>
-                                <package-name>$ANDROID_PACKAGE_NAME</package-name>
+                                <package-name>io.curity.haapidemo</package-name>
                                 <sha256-cert-fingerprints>
-                                    <fingerprint>$ANDROID_FINGERPRINT</fingerprint>
+                                    <fingerprint>67:60:CA:11:93:B6:5D:61:56:42:70:29:A1:10:B3:86:A8:48:C7:33:83:7B:B0:54:B0:0A:E3:E1:4A:7D:A0:A4</fingerprint>
                                 </sha256-cert-fingerprints>
                             </android-app-configuration>
                         </mobile-app-association>
@@ -44,10 +44,9 @@
                             <id>Passkeys</id>
                             <required-authenticator-for-registration>HtmlForm</required-authenticator-for-registration>
                             <passkeys xmlns="https://curity.se/ns/conf/authenticators/passkeys">
-                              <enable-discoverable-credentials>false</enable-discoverable-credentials>
-                              <account-manager>
+                            <account-manager>
                                 <id>default-account-manager</id>
-                              </account-manager>
+                            </account-manager>
                             </passkeys>
                         </authenticator>
                     </authenticators>
@@ -63,10 +62,10 @@
                     <client-store>
                         <config-backed>
                             <client>
-                                <id>haapi-ios-client</id>
+                                <id>haapi-ios-dev-client</id>
                                 <client-name>Haapi iOS Client</client-name>
                                 <no-authentication>true</no-authentication>
-                                <redirect-uris>haapi://callback</redirect-uris>
+                                <redirect-uris>haapi:start</redirect-uris>
                                 <user-authentication>
                                 </user-authentication>
                                 <scope>address</scope>
@@ -74,10 +73,6 @@
                                 <scope>openid</scope>
                                 <scope>phone</scope>
                                 <scope>profile</scope>
-                                <user-authentication>
-                                    <allowed-authenticators>HtmlForm</allowed-authenticators>
-                                    <allowed-authenticators>Passkeys</allowed-authenticators>
-                                </user-authentication>
                                 <capabilities>
                                     <code/>
                                     <haapi>
@@ -87,7 +82,7 @@
                                 <attestation>
                                 <disable-attestation-validation>true</disable-attestation-validation>
                                 <ios>
-                                    <app-id>$APPLE_BUNDLE_ID</app-id>
+                                    <app-id>io.curity.cat.ios.client</app-id>
                                     <ios-policy>ios-dev-policy</ios-policy>
                                 </ios>
                                 </attestation>
@@ -96,17 +91,13 @@
                                 <id>haapi-android-client</id>
                                 <client-name>Haapi Android Client</client-name>
                                 <no-authentication>true</no-authentication>
-                                <redirect-uris>haapi://callback</redirect-uris>
+                                <redirect-uris>app://haapi</redirect-uris>
                                 <audience>haapi-client</audience>
                                 <scope>address</scope>
                                 <scope>email</scope>
                                 <scope>openid</scope>
                                 <scope>phone</scope>
                                 <scope>profile</scope>
-                                <user-authentication>
-                                    <allowed-authenticators>HtmlForm</allowed-authenticators>
-                                    <allowed-authenticators>Passkeys</allowed-authenticators>
-                                </user-authentication>
                                 <capabilities>
                                     <code/>
                                     <haapi>
@@ -115,8 +106,8 @@
                                 </capabilities>
                                 <attestation>
                                     <android>
-                                        <package-name>$ANDROID_PACKAGE_NAME</package-name>
-                                        <signature-digest>$ANDROID_SIGNATURE_DIGEST</signature-digest>
+                                        <package-name>io.curity.haapidemo</package-name>
+                                        <signature-digest>Z2DKEZO2XWFWQnApoRCzhqhIxzODe7BUsArj4Up9oKQ=</signature-digest>
                                         <android-policy>android-dev-policy</android-policy>
                                     </android>
                                 </attestation>
