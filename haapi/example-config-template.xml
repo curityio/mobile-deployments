@@ -74,6 +74,10 @@
                                 <scope>openid</scope>
                                 <scope>phone</scope>
                                 <scope>profile</scope>
+                                <user-authentication>
+                                    <allowed-authenticators>HtmlForm</allowed-authenticators>
+                                    <allowed-authenticators>Passkeys</allowed-authenticators>
+                                </user-authentication>
                                 <capabilities>
                                     <code/>
                                     <haapi>
@@ -99,6 +103,10 @@
                                 <scope>openid</scope>
                                 <scope>phone</scope>
                                 <scope>profile</scope>
+                                <user-authentication>
+                                    <allowed-authenticators>HtmlForm</allowed-authenticators>
+                                    <allowed-authenticators>Passkeys</allowed-authenticators>
+                                </user-authentication>
                                 <capabilities>
                                     <code/>
                                     <haapi>
