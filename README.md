@@ -48,6 +48,9 @@ If you use ngrok you can also sign into the DevOps Dashboard and create test use
 - URL: `https://localhost:6749/admin/dashboard`
 - User: `admin`
 
+You may also need to trust the certificate at `resources/ssl-cert.pem` for the dashboard to work.\
+For example, import it to Keychain Access under `System / Certificates` and activate `Always Trust`.
+
 ## User Data
 
 You can query user data like accounts and passkeys by connecting to the PostgreSQL database:
