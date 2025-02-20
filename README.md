@@ -35,6 +35,41 @@ You can study the resources for a particular code example and apply them to your
 
 - [HAAPI configuration](haapi/example-config-template.xml)
 
+## Administration and Users
+
+Once the Curity Identity Server is deployed, sign in to the Admin UI using the following details:
+
+- URL: `https://localhost:6749/admin`
+- User: `admin`
+- Password: `Password1`
+
+Or sign into the DevOps Dashboard and create test user accounts:
+
+- URL: `https://localhost:6749/admin/dashboard`
+- User: `admin`
+
+## User Data
+
+You can query user data like accounts and passkeys by connecting to the PostgreSQL database:
+
+```bash
+POSTGRES_CONTAINER=$(docker ps | grep postgres | awk '{print $1}')
+docker exec -it $POSTGRES_CONTAINER bash
+```
+
+Then connect to the database:
+
+```bash
+export PGPASSWORD=Password1 && psql -p 5432 -d idsvr -U postgres
+```
+
+Then query data like user account details or registered passkey public keys:
+
+```text
+select * from accounts;
+select * from devices;
+```
+
 ## More Information
 
 Please visit [curity.io](https://curity.io/) for more information about the Curity Identity Server.

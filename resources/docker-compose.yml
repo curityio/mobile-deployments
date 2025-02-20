@@ -29,6 +29,6 @@ services:
      - ./messages/attribute-prompt:/opt/idsvr/usr/share/messages/overrides/en/authentication-action/attribute-prompt/messages
      - ./customizations/htmlform.vm:/opt/idsvr/usr/share/templates/overrides/authenticator/html-form/authenticate/get.vm
     environment:
-      PASSWORD: 'Password1'
+      ADMIN: 'true'
       RUNTIME_PROTOCOL: "${RUNTIME_PROTOCOL}"
       RUNTIME_BASE_URL: "${RUNTIME_BASE_URL}"
