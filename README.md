@@ -37,13 +37,13 @@ You can study the resources for a particular code example and apply them to your
 
 ## Administration and Users
 
-Once the Curity Identity Server is deployed, sign in to the Admin UI using the following details:
+After deploying the Curity Identity Server, sign in to the Admin UI using the following details:
 
 - URL: `https://localhost:6749/admin`
 - User: `admin`
 - Password: `Password1`
 
-Or sign into the DevOps Dashboard and create test user accounts:
+If you use ngrok you can also sign into the DevOps Dashboard and create test user accounts:
 
 - URL: `https://localhost:6749/admin/dashboard`
 - User: `admin`

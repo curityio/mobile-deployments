@@ -74,7 +74,7 @@ if [ $? -ne 0 ]; then
 fi
 
 #
-# Wait for endpoints to become available
+# Wait for Curity Identity Server endpoints to become available
 #
 echo 'Waiting for the Curity Identity Server ...'
 RESTCONF_BASE_URL='https://localhost:6749/admin/api/restconf/data'
@@ -83,6 +83,25 @@ ADMIN_PASSWORD='Password1'
 while [ "$(curl -k -s -o /dev/null -w ''%{http_code}'' -u "$ADMIN_USER:$ADMIN_PASSWORD" "$RESTCONF_BASE_URL?content=config")" != "200" ]; do
   sleep 2
 done
+
+#
+# For ngrok deployments, use RESTCONF to activate the DevOps dashboard to enable test user administration
+# When the Curity Identity Server uses a host IP address the dashboard experiences SSL trust errors so we do not activate it
+#
+if [ "$USE_NGROK" == 'true' ]; then
+
+  echo 'Activating the DevOps dashboard ...'
+  HTTP_STATUS=$(curl -k -s \
+    -X PATCH "$RESTCONF_BASE_URL" \
+    -u "$ADMIN_USER:$ADMIN_PASSWORD" \
+    -H 'Content-Type: application/yang-data+xml' \
+    -d @devops-dashboard.xml \
+    -o /dev/null -w '%{http_code}')
+  if [ "$HTTP_STATUS" != '204' ]; then
+    echo "Problem encountered applying the DevOps Dashboard configuration: $HTTP_STATUS"
+    exit 1
+  fi
+fi
 
 #
 # For the HAAPI example, update configuration dynamically based on additional environment variables 
@@ -101,13 +120,13 @@ fi
 #
 echo 'Applying code example configuration ...'
 HTTP_STATUS=$(curl -k -s \
--X PATCH "$RESTCONF_BASE_URL" \
--u "$ADMIN_USER:$ADMIN_PASSWORD" \
--H 'Content-Type: application/yang-data+xml' \
--d @example-config.xml \
--o /dev/null -w '%{http_code}')
+  -X PATCH "$RESTCONF_BASE_URL" \
+  -u "$ADMIN_USER:$ADMIN_PASSWORD" \
+  -H 'Content-Type: application/yang-data+xml' \
+  -d @example-config.xml \
+  -o /dev/null -w '%{http_code}')
 if [ "$HTTP_STATUS" != '204' ]; then
-  echo "Problem encountered updating the configuration: $HTTP_STATUS"
+  echo "Problem encountered applying the code example configuration: $HTTP_STATUS"
   exit 1
 fi
 
