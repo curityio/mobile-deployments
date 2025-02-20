@@ -49,7 +49,10 @@ If you use ngrok you can also sign into the DevOps Dashboard and create test use
 - User: `admin`
 
 You may also need to trust the certificate at `resources/ssl-cert.pem` for the dashboard to work.\
-For example, import it to Keychain Access under `System / Certificates` and activate `Always Trust`.
+For example, on macOS:
+
+- Import the certificate into Keychain Access under `System / Certificates`.
+- The configure `Always Trust` for the `curityserver` certificate.
 
 ## User Data
 
