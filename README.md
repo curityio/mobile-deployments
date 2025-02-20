@@ -28,7 +28,7 @@ Each mobile example calls the following script with parameters to start and stop
 ## Configuration
 
 The files in the `resources` folder provide base behaviors related to data and user accounts.\
-Different deployment scenarios can use their own configuration files and supply parameters.
+Different deployment scenarios can apply specific configuration files or override parameters.
 
 For example, HAAPI deployments require a number of technical configuration settings.\
 You can study the resources for a particular code example and apply them to your deployed deployments.
