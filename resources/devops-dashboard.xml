@@ -1,4 +1,4 @@
-<data xmlns="urn:ietf:params:xml:ns:yang:ietf-restconf">
+<config xmlns="http://tail-f.com/ns/config/1.0">
   <environments xmlns="https://curity.se/ns/conf/base">
      <environment>
         <admin-service>
@@ -160,4 +160,4 @@
       </authorization-manager>
     </authorization-managers>
   </processing>
-</data>
+</config>

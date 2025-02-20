@@ -4,6 +4,7 @@
       <base-url>#{RUNTIME_BASE_URL}</base-url>
       <admin-service>
         <http>
+          <base-url>https://localhost:6749</base-url>
           <ssl-server-keystore>default-admin-ssl-key</ssl-server-keystore>
           <web-ui/>
           <restconf>
