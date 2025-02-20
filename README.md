@@ -1,11 +1,11 @@
 # Mobile Deployments
 
-Automated deployments of the Curity Identity Server to provide fast working mobile setups.\
+Automated deployments of the Curity Identity Server to provide initial infrastructure for mobile testing.\
 This repository provides a consistent developer experience for anyone who wants to run mobile examples.
 
 ## Example Applications
 
-The following applications use this repository:
+The following example applications can use this repository:
 
 - [Android Kotlin AppAuth Code Example](https://curity.io/resources/learn/kotlin-android-appauth/)
 - [iOS Swift AppAuth Code Example](https://curity.io/resources/learn/swift-ios-appauth/)
@@ -27,7 +27,7 @@ Each mobile example calls the following script with parameters to start and stop
 
 ## Configuration
 
-The files in the `resources` folder provide base behaviors related to data and user accounts.\
+The files in the `resources` folder provide base configuration.\
 Different deployment scenarios can apply specific configuration files or override parameters.
 
 For example, HAAPI deployments require a number of technical configuration settings.\
