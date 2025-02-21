@@ -41,7 +41,7 @@ After deploying the Curity Identity Server, sign in to the Admin UI using the fo
 - User: `admin`
 - Password: `Password1`
 
-If you use ngrok you can also sign into the DevOps Dashboard and create test user accounts:
+If you use ngrok and you have a suitable license file you can also sign into the DevOps Dashboard and create test user accounts:
 
 - URL: `https://localhost:6749/admin/dashboard`
 - User: `admin`
