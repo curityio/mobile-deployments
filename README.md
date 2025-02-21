@@ -46,7 +46,7 @@ If you use ngrok and you have a suitable license file you can also sign into the
 - URL: `https://localhost:6749/admin/dashboard`
 - User: `admin`
 
-You may also need to trust the certificate at `resources/ssl-cert.pem` for the dashboard to work.\
+You may also need to trust the `localhost` certificate at `resources/ssl-cert.pem` for the dashboard to succesfully make fetch requests.\
 For example, on macOS:
 
 - Import the certificate into Keychain Access under `System / Certificates`.
