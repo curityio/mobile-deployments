@@ -85,7 +85,8 @@ while [ "$(curl -k -s -o /dev/null -w ''%{http_code}'' -u "$ADMIN_USER:$ADMIN_PA
 done
 
 #
-# If the license allows it, use RESTCONF to activate the DevOps dashboard to enable test user administration.
+# For ngrok deployments, use RESTCONF to activate the DevOps dashboard to enable test user administration.
+# When the Curity Identity Server uses a host IP address the dashboard experiences SSL trust errors so we do not activate it.
 #
 base64url_decode() {
   local len=$((${#1} % 4))
@@ -96,22 +97,25 @@ base64url_decode() {
   echo "$result" | tr '_-' '/+' | base64 --decode
 }
 
-LICENSE_DATA=$(cat './license.json')
-LICENSE_JWT=$(echo $LICENSE_DATA | jq -r .License)
-LICENSE_PAYLOAD=$(base64url_decode $(echo $LICENSE_JWT | cut -d '.' -f 2))
-DASHBOARD=$(echo $LICENSE_PAYLOAD | jq -r '.Features[]  | select(.feature == "dashboard")')
-if [ "$DASHBOARD" != '' ]; then
+if [ "$USE_NGROK" == 'true' ]; then
 
-  echo 'Activating the DevOps dashboard ...'
-  HTTP_STATUS=$(curl -k -s \
-    -X PATCH "$RESTCONF_BASE_URL" \
-    -u "$ADMIN_USER:$ADMIN_PASSWORD" \
-    -H 'Content-Type: application/yang-data+xml' \
-    -d @devops-dashboard.xml \
-    -o /dev/null -w '%{http_code}')
-  if [ "$HTTP_STATUS" != '204' ]; then
-    echo "Problem encountered applying the DevOps Dashboard configuration: $HTTP_STATUS"
-    exit 1
+  LICENSE_DATA=$(cat './license.json')
+  LICENSE_JWT=$(echo $LICENSE_DATA | jq -r .License)
+  LICENSE_PAYLOAD=$(base64url_decode $(echo $LICENSE_JWT | cut -d '.' -f 2))
+  DASHBOARD=$(echo $LICENSE_PAYLOAD | jq -r '.Features[]  | select(.feature == "dashboard")')
+  if [ "$DASHBOARD" != '' ]; then
+
+    echo 'Activating the DevOps dashboard ...'
+    HTTP_STATUS=$(curl -k -s \
+      -X PATCH "$RESTCONF_BASE_URL" \
+      -u "$ADMIN_USER:$ADMIN_PASSWORD" \
+      -H 'Content-Type: application/yang-data+xml' \
+      -d @devops-dashboard.xml \
+      -o /dev/null -w '%{http_code}')
+    if [ "$HTTP_STATUS" != '204' ]; then
+      echo "Problem encountered applying the DevOps Dashboard configuration: $HTTP_STATUS"
+      exit 1
+    fi
   fi
 fi
 
