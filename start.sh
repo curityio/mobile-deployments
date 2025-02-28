@@ -22,21 +22,21 @@ if [ -d '.git/hooks' ]; then
 fi
 
 #
-# The example name determines which RESTCONF PATCH is applied
-# AppAuth examples work with a community edition license file
-# HAAPI examples require a paid license file
+# Code examples provide these command line parameters:
+# - USE_NGROK - a boolean to determine whether the script spins up an ngrok tunnel
+# - RUNTIME_BASE_URL - The base URL through which an emulator or device calls the Curity Identity Server if not using NGROK
+# - EXAMPLE_NAME - the subfolder from which the mobile configuration is applied, eg 'haapi' or 'appauth'
 #
 USE_NGROK="$1"
-BASE_URL="$2"
+RUNTIME_BASE_URL="$2"
 EXAMPLE_NAME="$3"
-if [ "$EXAMPLE_NAME" == '' ] || [ "$BASE_URL" == '' ]; then
+if [ "$USE_NGROK" == '' ] || [ "$RUNTIME_BASE_URL" == '' ] || [ "$EXAMPLE_NAME" == '' ]; then
   echo 'Incorrect command line arguments supplied to the start.sh script'
   exit 1
 fi
 
 #
-# If required, get a trusted SSL internet URL that mobile apps or simulators can connect to
-# This enables mobile associated domain files to be hosted
+# Shared logic to spin up an ngrok tunnel to expose the Curity Identity Server using a trusted HTTPS internet URL.
 #
 if [ "$USE_NGROK" == 'true' ]; then
 
@@ -52,8 +52,7 @@ if [ "$USE_NGROK" == 'true' ]; then
     exit 1
   fi
 else
-  RUNTIME_BASE_URL="$BASE_URL"
-  if [[ "$BASE_URL" == https* ]]; then
+  if [[ "$RUNTIME_BASE_URL" == https* ]]; then
     RUNTIME_PROTOCOL="https"
   else
     RUNTIME_PROTOCOL="http"
@@ -61,15 +60,12 @@ else
 fi
 
 #
-# Deploy the Curity Identity server
+# Deploy an up to date version of the Curity Identity server
 #
 export RUNTIME_PROTOCOL
 export RUNTIME_BASE_URL
 cd resources
-
-# Ensure the latest Curity Identity Server image is used
 docker pull curity.azurecr.io/curity/idsvr
-
 docker compose --project-name $EXAMPLE_NAME down
 docker compose --project-name $EXAMPLE_NAME up --detach
 if [ $? -ne 0 ]; then
@@ -78,7 +74,7 @@ if [ $? -ne 0 ]; then
 fi
 
 #
-# Wait for endpoints to become available
+# Wait for Curity Identity Server endpoints to become available
 #
 echo 'Waiting for the Curity Identity Server ...'
 RESTCONF_BASE_URL='https://localhost:6749/admin/api/restconf/data'
@@ -89,31 +85,48 @@ while [ "$(curl -k -s -o /dev/null -w ''%{http_code}'' -u "$ADMIN_USER:$ADMIN_PA
 done
 
 #
-# For the HAAPI example, update configuration dynamically
+# For ngrok deployments, use RESTCONF to activate the DevOps dashboard to enable test user administration.
+# When the Curity Identity Server uses a host IP address the dashboard experiences SSL trust errors so we do not activate it.
+#
+base64url_decode() {
+  local len=$((${#1} % 4))
+  local result="$1"
+  if [ $len -eq 2 ]; then result="$1"'=='
+  elif [ $len -eq 3 ]; then result="$1"'=' 
+  fi
+  echo "$result" | tr '_-' '/+' | base64 --decode
+}
+
+if [ "$USE_NGROK" == 'true' ]; then
+
+  LICENSE_DATA=$(cat './license.json')
+  LICENSE_JWT=$(echo $LICENSE_DATA | jq -r .License)
+  LICENSE_PAYLOAD=$(base64url_decode $(echo $LICENSE_JWT | cut -d '.' -f 2))
+  DASHBOARD=$(echo $LICENSE_PAYLOAD | jq -r '.Features[]  | select(.feature == "dashboard")')
+  if [ "$DASHBOARD" != '' ]; then
+
+    echo 'Activating the DevOps dashboard ...'
+    HTTP_STATUS=$(curl -k -s \
+      -X PATCH "$RESTCONF_BASE_URL" \
+      -u "$ADMIN_USER:$ADMIN_PASSWORD" \
+      -H 'Content-Type: application/yang-data+xml' \
+      -d @devops-dashboard.xml \
+      -o /dev/null -w '%{http_code}')
+    if [ "$HTTP_STATUS" != '204' ]; then
+      echo "Problem encountered applying the DevOps Dashboard configuration: $HTTP_STATUS"
+      exit 1
+    fi
+  fi
+fi
+
+#
+# For the HAAPI example, update configuration dynamically based on additional environment variables 
 #
 cd ../$EXAMPLE_NAME
 if [ "$EXAMPLE_NAME" == 'haapi' ]; then
-
-  if [ "$ANDROID_FINGERPRINT" == '' ]; then
-    ANDROID_FINGERPRINT='67:60:CA:11:93:B6:5D:61:56:42:70:29:A1:10:B3:86:A8:48:C7:33:83:7B:B0:54:B0:0A:E3:E1:4A:7D:A0:A4'
-  fi
-  if [ "$ANDROID_SIGNATURE_DIGEST" == '' ]; then
-    ANDROID_SIGNATURE_DIGEST='Z2DKEZO2XWFWQnApoRCzhqhIxzODe7BUsArj4Up9oKQ='
-  fi
-  if [ "$APPLE_APP_ID" == '' ]; then
-    APPLE_APP_ID='io.curity.cat.ios.client'
-  fi
-  if [ "$APPLE_TEAM_ID" == '' ]; then
-    APPLE_TEAM_ID='MYTEAMID'
-  fi
-
-  export APPLE_APP_ID
-  export APPLE_TEAM_ID
-  export ANDROID_FINGERPRINT
-  export ANDROID_SIGNATURE_DIGEST
-  envsubst < example-config-template.xml > example-config.xml
+  ./configure.sh
   if [ $? -ne 0 ]; then
-    echo 'Problem encountered using envsubst to update example configuration'
+    echo 'Problem encountered updating HAAPI configuration'
     exit 1
   fi
 fi
@@ -123,18 +136,18 @@ fi
 #
 echo 'Applying code example configuration ...'
 HTTP_STATUS=$(curl -k -s \
--X PATCH "$RESTCONF_BASE_URL" \
--u "$ADMIN_USER:$ADMIN_PASSWORD" \
--H 'Content-Type: application/yang-data+xml' \
--d @example-config.xml \
--o /dev/null -w '%{http_code}')
+  -X PATCH "$RESTCONF_BASE_URL" \
+  -u "$ADMIN_USER:$ADMIN_PASSWORD" \
+  -H 'Content-Type: application/yang-data+xml' \
+  -d @example-config.xml \
+  -o /dev/null -w '%{http_code}')
 if [ "$HTTP_STATUS" != '204' ]; then
-  echo "Problem encountered updating the configuration: $HTTP_STATUS"
+  echo "Problem encountered applying the code example configuration: $HTTP_STATUS"
   exit 1
 fi
 
 #
-# Return the base URL to the parent script
+# Return the final runtime base URL to the parent script
 #
 cd ..
 echo "$RUNTIME_BASE_URL">./output.txt

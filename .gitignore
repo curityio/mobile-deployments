@@ -6,3 +6,4 @@ output.txt
 *.key
 *.bks
 *.jar
+certs

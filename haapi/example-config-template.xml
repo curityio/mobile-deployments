@@ -18,13 +18,13 @@
                     <default-zone>
                         <mobile-app-association>
                             <ios-app-configuration>
-                                <app-id>$APPLE_TEAM_ID.$APPLE_APP_ID</app-id>
+                                <app-id>MYTEAMID.io.curity.cat.ios.client</app-id>
                             </ios-app-configuration>
                             <android-app-configuration>
                                 <namespace>android_app</namespace>
                                 <package-name>io.curity.haapidemo</package-name>
                                 <sha256-cert-fingerprints>
-                                    <fingerprint>$ANDROID_FINGERPRINT</fingerprint>
+                                    <fingerprint>67:60:CA:11:93:B6:5D:61:56:42:70:29:A1:10:B3:86:A8:48:C7:33:83:7B:B0:54:B0:0A:E3:E1:4A:7D:A0:A4</fingerprint>
                                 </sha256-cert-fingerprints>
                             </android-app-configuration>
                         </mobile-app-association>
@@ -82,7 +82,7 @@
                                 <attestation>
                                 <disable-attestation-validation>true</disable-attestation-validation>
                                 <ios>
-                                    <app-id>$APPLE_APP_ID</app-id>
+                                    <app-id>io.curity.cat.ios.client</app-id>
                                     <ios-policy>ios-dev-policy</ios-policy>
                                 </ios>
                                 </attestation>
@@ -107,7 +107,7 @@
                                 <attestation>
                                     <android>
                                         <package-name>io.curity.haapidemo</package-name>
-                                        <signature-digest>$ANDROID_SIGNATURE_DIGEST</signature-digest>
+                                        <signature-digest>Z2DKEZO2XWFWQnApoRCzhqhIxzODe7BUsArj4Up9oKQ=</signature-digest>
                                         <android-policy>android-dev-policy</android-policy>
                                     </android>
                                 </attestation>
