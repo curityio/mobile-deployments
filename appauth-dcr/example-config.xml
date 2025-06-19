@@ -37,9 +37,6 @@
                                     <code>
                                     </code>
                                 </capabilities>
-                                <use-pairwise-subject-identifiers>
-                                    <sector-identifier>mobile-dcr-client</sector-identifier>
-                                </use-pairwise-subject-identifiers>
                                 <validate-port-on-loopback-interfaces>true</validate-port-on-loopback-interfaces>
                             </client>
                         </config-backed>
