@@ -12,7 +12,7 @@ The following example applications can use this repository:
 - [Advanced AppAuth code example using Dynamic Client Registration](https://curity.io/resources/learn/authenticated-dcr-example/)
 - [Android Kotlin HAAPI UI SDK Code Example](https://curity.io/resources/learn/kotlin-android-haapi/)
 - [iOS Swift HAAPI UI SDK Code Example](https://curity.io/resources/learn/swift-ios-haapi/)
-- [React Native HAAPI Code Example](https://curity.io/resources/learn/react-native-haapi/)
+- [React Native HAAPI Code Example](https://curity.io/resources/learn/reactnative-haapi/)
 - [Android Kotlin HAAPI Model SDK Code Example](https://github.com/curityio/android-haapi-demo-app)
 - [iOS Swaift HAAPI Model SDK Code Example](https://github.com/curityio/ios-haapi-demo-app)
 
