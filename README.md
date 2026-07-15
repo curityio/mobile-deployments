@@ -1,5 +1,8 @@
 # Mobile Deployments
 
+[![Quality](https://img.shields.io/badge/quality-demo-red)](https://curity.io/resources/code-examples/status/)
+[![Availability](https://img.shields.io/badge/availability-source-blue)](https://curity.io/resources/code-examples/status/)
+
 Automated deployments of the Curity Identity Server to provide initial infrastructure for mobile testing.\
 This repository provides a consistent developer experience for anyone who wants to run mobile examples.
 
